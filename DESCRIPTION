@@ -17,3 +17,7 @@ Imports:
     fs,
     cli,
     renv
+Suggests: 
+    testthat (>= 2.99.0)
+Remotes: r-lib/testthat
+Config/testthat/edition: 3
