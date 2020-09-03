@@ -63,7 +63,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#checklist" class="anchor"></a>checklist</h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+<p><img src="https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"><img src="https://github.com/rundel/checklist/workflows/pkgdown/badge.svg" alt="pkgdown"><!-- badges: end --></p>
 <p>The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example:</p>
 <ul>
 <li>does the project compile (knit)</li>
@@ -112,20 +112,19 @@ install.packages("checklist")
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">check_allowed_files</span>(<span class="kw">c</span>(<span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>), dir, <span class="dt">all =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; x .DS_Store</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; x .Rhistory</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0A29983A</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0BC2306D</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/INDEX</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/56A65601-contents</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5-contents</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/lock_file</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/AF10DFE7A1C8B866/chunks.json</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/s/chunks.json</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/patch-chunk-names</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/paths</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; x .gitignore</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; x .Rhistory</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0A29983A</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0BC2306D</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/INDEX</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/56A65601-contents</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5-contents</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/lock_file</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/AF10DFE7A1C8B866/chunks.json</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/s/chunks.json</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/patch-chunk-names</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/paths</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; x .gitignore</span></span></code></pre></div>
 <p>To refine this, we may want to allow <code>.gitignore</code> as well as the <code>.Rproj.user/</code> folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">check_allowed_files</span>(</span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="kw">c</span>(<span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>, <span class="st">".gitignore"</span>, <span class="st">".Rproj.user/*"</span>), </span>
@@ -133,8 +132,7 @@ install.packages("checklist")
 <span id="cb8-4"><a href="#cb8-4"></a>)</span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; x .DS_Store</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; x .Rhistory</span></span></code></pre></div>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; x .Rhistory</span></span></code></pre></div>
 </div>
 </div>
   </div>
