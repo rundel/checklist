@@ -1,28 +1,31 @@
 test_that("find_files", {
+
+  dir = system.file("examples/hw1", package="checklist")
+
   # Literal
-  expect_equal(find_files("README.Rmd"), "README.Rmd", ignore_attr=TRUE)
+  expect_equal(find_files("hw1.Rmd", dir), "hw1.Rmd", ignore_attr=TRUE)
   # Glob
-  expect_equal(find_files("README.*"), c("README.Rmd", "README.md"), ignore_attr=TRUE)
+  expect_equal(find_files("hw1.*", dir), c("hw1.Rmd", "hw1.Rproj"), ignore_attr=TRUE)
   # Regex
-  expect_equal(find_files("README\\.(Rmd|md)", regex = TRUE, recurse = FALSE),
-               c("README.Rmd", "README.md"), ignore_attr=TRUE)
+  expect_equal(find_files("hw1\\.(Rmd|Rproj)", dir, regex = TRUE, recurse = FALSE),
+               c("hw1.Rmd", "hw1.Rproj"), ignore_attr=TRUE)
   # Missing file
-  expect_equal(length(find_files("README.Rnw")), 0)
+  expect_true(length(find_files("hw1.Rnw", dir)) ==  0)
 
   # Multiple literal files
   expect_equal(
-    find_files(c("README.Rmd", "README.md")),
-    c("README.Rmd", "README.md"),
+    find_files(c("hw1.Rmd", "hw1.Rproj"), dir),
+    c("hw1.Rmd", "hw1.Rproj"),
     ignore_attr=TRUE
   )
 
   # Hidden files
-  expect_false(".gitignore" %in% find_files(".*"))
-  expect_true(".gitignore" %in% find_files(".*", all=TRUE))
+  expect_false(".gitignore" %in% find_files(".*", dir))
+  expect_true(".gitignore" %in% find_files(".*", dir, all=TRUE))
 
   # Invert
-  expect_false( "README.Rmd" %in% find_files("README.Rmd", invert = TRUE) )
-  expect_true( "DESCRIPTION" %in% find_files("README.Rmd", invert = TRUE) )
+  expect_false( "hw1.Rmd" %in% find_files("hw1.Rmd", dir, invert = TRUE) )
+  expect_true( "hw1.Rproj" %in% find_files("hw1.Rmd", dir, invert = TRUE) )
 })
 
 test_that("check_allowed_files", {
