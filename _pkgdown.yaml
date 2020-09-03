@@ -1,0 +1,8 @@
+url: https://rundel.github.io/checklist
+
+reference:
+- title: Functions
+  contents:
+  - ends_with("_files")
+  - ends_with("_pkgs")
+  - quit_on_failure
