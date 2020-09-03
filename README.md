@@ -5,6 +5,9 @@ checklist
 =========
 
 <!-- badges: start -->
+
+![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)
+![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)
 <!-- badges: end -->
 
 The goal of this package is to provide a variety of tools for checking
@@ -84,7 +87,6 @@ with a `.`) but we can also check for these as well using the
     check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
     #> Disallowed files found: (please remove the following files)
     #> ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    #> x .DS_Store
     #> x .Rhistory
     #> x .Rproj.user/AF10DFE7/sources/prop/0A29983A
     #> x .Rproj.user/AF10DFE7/sources/prop/0BC2306D
@@ -109,5 +111,4 @@ can even use standard glob wildcards to make our life easier,
     )
     #> Disallowed files found: (please remove the following files)
     #> ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    #> x .DS_Store
     #> x .Rhistory

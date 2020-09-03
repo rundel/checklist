@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # checklist
 
 <!-- badges: start -->
+![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)
+![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)
 <!-- badges: end -->
 
 The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example: 
