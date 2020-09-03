@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://rundel.github.io/checklist/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rundel.github.io/checklist/reference/check_files.html</loc>
+  </url>
+  <url>
+    <loc>https://rundel.github.io/checklist/reference/check_pkgs.html</loc>
+  </url>
+  <url>
+    <loc>https://rundel.github.io/checklist/reference/quit_on_failure.html</loc>
+  </url>
+</urlset>
