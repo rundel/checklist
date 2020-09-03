@@ -16,7 +16,9 @@ Imports:
     here,
     fs,
     cli,
-    renv
+    renv,
+    knitr,
+    rmarkdown
 Suggests: 
     testthat (>= 2.99.0)
 Remotes: r-lib/testthat
