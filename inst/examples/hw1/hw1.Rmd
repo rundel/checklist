@@ -1,0 +1,80 @@
+---
+title: "Homework 1"
+output: github_document
+author: Jane Doe Student
+---
+
+### Task 1 - Implementation
+
+Use this section to implement the fizzbuzz function.
+
+This should replace this text with a short write up describing your approach
+to implementing the function. Note that in future assignments both code formatting / style
+and your write-up matter for your overall mark
+
+
+```{r fizzbuzz}
+fizzbuzz = function(v) {
+  if (!is.numeric(v))
+    stop("Only numeric inputs are allowed.")
+  
+  if (any(is.na(v)))
+    stop("Missing values are not allowed.")
+  
+  if (any(!is.finite(v) | v <= 0) || any(v != as.integer(v)))
+    stop("All values must be positive integers")
+    
+  for(x in v) {
+    if (x %% 5 ==0 & x %% 3 == 0) {
+      print("FizzBuzz")
+    } else if (x %% 3 == 0) {
+      print("Fizz")
+    } else if (x %% 5 == 0) {
+      print("Buzz")
+    } else {
+      print(x)
+    }
+  }
+}
+```
+
+### Task 2 - Validation & Testing
+
+Below are a (incomplete) collection of test cases that have been separated into good and bad inputs. After you have implemented the function above check that the test cases below produce the correct output (or at least a useful error message).
+
+#### Good Inputs
+
+```{r}
+fizzbuzz(1)
+fizzbuzz(3)
+fizzbuzz(5)
+fizzbuzz(15)
+
+fizzbuzz(9:15)
+fizzbuzz(15:9)
+
+fizzbuzz(1:12)
+```
+
+
+#### Bad Inputs
+
+```{r error=TRUE}
+fizzbuzz(-1)
+fizzbuzz(-3)
+fizzbuzz(-5)
+
+fizzbuzz(TRUE)
+fizzbuzz(FALSE)
+
+fizzbuzz(Inf)
+fizzbuzz(-Inf)
+fizzbuzz(NaN)
+
+fizzbuzz("A")
+fizzbuzz(1.5)
+fizzbuzz(1i)
+fizzbuzz(4i)
+```
+
+

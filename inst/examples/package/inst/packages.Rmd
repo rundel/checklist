@@ -1,0 +1,12 @@
+
+```{r}
+library(A)
+
+require(B)
+
+requireNamespace("C")
+
+D::E()
+```
+
+Hello world - we are using package `r F::G()`.
