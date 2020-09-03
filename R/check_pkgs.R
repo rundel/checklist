@@ -11,7 +11,7 @@ NULL
 #' @describeIn check_pkgs Returns a vector of installed packages.
 #' @export
 installed_pkgs = function() {
-  rownames( installed.packages() )
+  rownames( utils::installed.packages() )
 }
 
 #' @describeIn check_pkgs Returns a vector of packages found by `find_pkgs` that are not currently installed.
