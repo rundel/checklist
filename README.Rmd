@@ -45,10 +45,50 @@ devtools::install_github("rundel/checklist")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+```{r}
 library(checklist)
-## basic example code
 ```
+
+Lets look at a simple example of the type of assignment a student might turnin, all of the files are available in `inst/examples/hw1` within this repository, if you have already installed the package then we can also find the directory using `system.file("examples/hw1", package="checklist")`.
+
+```{r}
+dir = system.file("examples/hw1", package="checklist")
+
+# Show the project contents
+fs::dir_tree(dir)
+```
+
+We can now use `checklist` to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a knitted version of their homework we could use the following check:
+
+```{r}
+check_required_files("hw1.md", dir)
+```
+
+Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicity with
+
+```{r}
+check_disallowed_files("hw1.md", dir)
+```
+
+Alternatively we may instead want to explicity about what files are allowed (ensuring students have not added or renamed anything), then we can
+
+```{r}
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+```
+
+By default the package ignores hidden files (files whose name starts with a `.`) but we can also check for these as well using the `all = TRUE` argument.
+
+```{r}
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
+```
+
+To refine this, we may want to allow `.gitignore` as well as the `.Rproj.user/` folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,
+
+```{r}
+check_allowed_files(
+  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"), 
+  dir, all = TRUE
+)
+```
+
 

@@ -37,7 +37,77 @@ You can install the the development version of this package from
 Example
 -------
 
-This is a basic example which shows you how to solve a common problem:
-
     library(checklist)
-    ## basic example code
+
+Lets look at a simple example of the type of assignment a student might
+turnin, all of the files are available in `inst/examples/hw1` within
+this repository, if you have already installed the package then we can
+also find the directory using
+`system.file("examples/hw1", package="checklist")`.
+
+    dir = system.file("examples/hw1", package="checklist")
+
+    # Show the project contents
+    fs::dir_tree(dir)
+    #> /usr/local/lib/R/4.0/site-library/checklist/examples/hw1
+    #> ├── README.md
+    #> ├── fizzbuzz.png
+    #> ├── hw1.Rmd
+    #> └── hw1.Rproj
+
+We can now use `checklist` to express simple checks for the files in
+this directory. For example if we wanted to make sure that the students
+submit a knitted version of their homework we could use the following
+check:
+
+    check_required_files("hw1.md", dir)
+    #> The following required files are missing:
+    #> ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    #> x hw1.md
+
+Alternatively, we may want to prevent the students from turning in a
+knitted version (to check the reproducibility of their work) and this
+can be done explicity with
+
+    check_disallowed_files("hw1.md", dir)
+
+Alternatively we may instead want to explicity about what files are
+allowed (ensuring students have not added or renamed anything), then we
+can
+
+    check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+
+By default the package ignores hidden files (files whose name starts
+with a `.`) but we can also check for these as well using the
+`all = TRUE` argument.
+
+    check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
+    #> Disallowed files found: (please remove the following files)
+    #> ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    #> x .DS_Store
+    #> x .Rhistory
+    #> x .Rproj.user/AF10DFE7/sources/prop/0A29983A
+    #> x .Rproj.user/AF10DFE7/sources/prop/0BC2306D
+    #> x .Rproj.user/AF10DFE7/sources/prop/INDEX
+    #> x .Rproj.user/AF10DFE7/sources/s-A1C8B866/56A65601-contents
+    #> x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5
+    #> x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5-contents
+    #> x .Rproj.user/AF10DFE7/sources/s-A1C8B866/lock_file
+    #> x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/AF10DFE7A1C8B866/chunks.json
+    #> x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/s/chunks.json
+    #> x .Rproj.user/shared/notebooks/patch-chunk-names
+    #> x .Rproj.user/shared/notebooks/paths
+    #> x .gitignore
+
+To refine this, we may want to allow `.gitignore` as well as the
+`.Rproj.user/` folder. These can be added to the files argument and we
+can even use standard glob wildcards to make our life easier,
+
+    check_allowed_files(
+      c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"), 
+      dir, all = TRUE
+    )
+    #> Disallowed files found: (please remove the following files)
+    #> ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    #> x .DS_Store
+    #> x .Rhistory
