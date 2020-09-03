@@ -2,23 +2,34 @@
 % Please edit documentation in R/check_files.R
 \name{check_files}
 \alias{check_files}
+\alias{find_files}
 \alias{check_allowed_files}
 \alias{check_disallowed_files}
 \alias{check_required_files}
-\title{Check for allowed or disallowed files in a directory}
+\title{Check for allowed or disallowed files in a project or directory}
 \usage{
-check_allowed_files(
-  files = "",
-  dir = ".",
+find_files(
+  files,
+  dir = here::here(),
   all = FALSE,
   recurse = TRUE,
   type = c("file", "directory", "any"),
-  regexp = FALSE
+  regex = FALSE,
+  invert = FALSE
 )
 
-check_disallowed_files(files = "", dir = ".", regexp = FALSE)
+check_allowed_files(
+  files,
+  dir = here::here(),
+  all = FALSE,
+  recurse = TRUE,
+  type = c("file", "directory", "any"),
+  regex = FALSE
+)
 
-check_required_files(files = "", dir = ".")
+check_disallowed_files(files, dir = here::here(), regex = FALSE)
+
+check_required_files(files, dir = here::here())
 }
 \arguments{
 \item{files}{Character vector of allowed file names}
@@ -28,18 +39,23 @@ check_required_files(files = "", dir = ".")
 \item{all}{If \code{TRUE} include hidden files}
 
 \item{recurse}{If \code{TRUE} recurse fully, if a positive number
-the number of levels to recurse.}
+the number of levels to recurse}
 
-\item{type}{File type to return, one of "file", "directory", or "any".}
+\item{type}{File type to return, one of "file", "directory", or "any"}
 
-\item{regexp}{If \code{TRUE} use \code{allowed_files} as regexp patterns,
+\item{regex}{If \code{TRUE} use \code{allowed_files} as a regular expression
 otherwise assume wildcard (glob) patterns}
+
+\item{invert}{If \code{TRUE} return files which do \emph{not} match}
 }
 \description{
-Check for allowed or disallowed files in a directory
+Check for allowed or disallowed files in a project or directory
 }
 \section{Functions}{
 \itemize{
+\item \code{find_files}: Find all files that match the given pattern (glob or regex)
+within the given directory
+
 \item \code{check_allowed_files}: Check that only the allowed file(s) exist
 
 \item \code{check_disallowed_files}: Check if any disallowed file(s) exist
