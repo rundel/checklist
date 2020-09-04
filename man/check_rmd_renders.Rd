@@ -4,14 +4,10 @@
 \alias{check_rmd_renders}
 \title{Check an Rmd file renders using rmarkdown}
 \usage{
-check_rmd_renders(file, install_missing = TRUE, update_packages = FALSE)
+check_rmd_renders(file)
 }
 \arguments{
 \item{file}{Path of an Rmd file}
-
-\item{install_missing}{Should any missing packages be installed. Default \code{TRUE}.}
-
-\item{update_packages}{Should installed packages be updated before rendering. Default \code{FALSE}.}
 }
 \description{
 Check an Rmd file renders using rmarkdown
