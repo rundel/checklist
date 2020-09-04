@@ -8,13 +8,9 @@ list_items = function(text, files, sub = NULL, symbol = cli::col_red(cli::symbol
   )
 
   cli::cli_div(theme = theme)
-
-  cli::cli_text("")
   cli::cli_text(text)
   cli::cli_rule()
   cli::cli_ul(files)
-  cli::cli_text("")
-
   cli::cli_end()
 }
 
