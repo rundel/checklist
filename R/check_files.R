@@ -24,6 +24,7 @@ find_files = function(
   files, dir = here::here(), all = FALSE, recurse = TRUE,
   type = c("file", "directory", "any"), regex = FALSE, invert = FALSE
 ) {
+  dir = fs::path_real(dir)
   type = match.arg(type)
 
   f = fs::dir_ls(path = dir, all = all, recurse = recurse, type = type)
@@ -77,6 +78,7 @@ check_disallowed_files = function(files, dir = here::here(), regex = FALSE) {
 #' @describeIn check_files Check that the required file(s) exist
 #' @export
 check_required_files = function(files, dir = here::here()) {
+  dir = fs::path_real(dir)
   f = fs::dir_ls(path = dir, all = TRUE, recurse = TRUE, type = "any")
   f = abs_to_rel_path(f, dir)
 
