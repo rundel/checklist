@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
-last_built: 2020-09-04T13:50Z
+articles: {}
+last_built: 2020-10-20T22:24Z
 urls:
   reference: https://rundel.github.io/checklist/reference
   article: https://rundel.github.io/checklist/articles
