@@ -4,10 +4,12 @@
 \alias{quit_on_failure}
 \title{Quit on Failure}
 \usage{
-quit_on_failure(expr)
+quit_on_failure(expr, n_br = 1)
 }
 \arguments{
 \item{expr}{Expression returning a logical vector}
+
+\item{n_br}{Number of leading and trailing blank lines to print}
 }
 \value{
 expr
