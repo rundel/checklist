@@ -14,40 +14,47 @@ installed_pkgs()
 
 missing_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  recurse = TRUE
 )
 
 find_pkgs(
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
-  full = FALSE
+  full = FALSE,
+  recurse = TRUE
 )
 
 check_allowed_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
-  full = FALSE
+  full = FALSE,
+  recurse = TRUE
 )
 
 check_disallowed_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
-  full = FALSE
+  full = FALSE,
+  recurse = TRUE
 )
 
 check_required_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
-  full = FALSE
+  full = FALSE,
+  recurse = TRUE
 )
 }
 \arguments{
 \item{dir}{Directory to search.}
 
 \item{glob}{File types to search for, defaults to \code{R}, \code{Rmd}, and \code{Rnw} files.}
+
+\item{recurse}{Should directory be recursively explored (i.e. match files in sub directories)}
 
 \item{full}{Should the full data frame of dependencies be returned or just a vector of package names.}
 

@@ -29,6 +29,7 @@ missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rn
 find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$", full = FALSE, recurse = TRUE) {
   files = fs::dir_ls(path = dir, glob = glob, recurse = recurse,  type = "file")
   files = fs::path_real(files) # need abs paths for renv
+  dir = fs::path_real(dir)
 
   if (length(files) == 0)
     files = dir
