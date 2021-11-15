@@ -5,6 +5,7 @@
 #' @param glob File types to search for, defaults to `R`, `Rmd`, and `Rnw` files.
 #' @param full Should the full data frame of dependencies be returned or just a vector of package names.
 #' @param recurse Should directory be recursively explored (i.e. match files in sub directories)
+#' @param ... Additional arguments passed to [install.packages()].
 #'
 #' @name check_pkgs
 NULL
@@ -22,6 +23,13 @@ missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rn
   installed = installed_pkgs()
 
   setdiff(needed, installed)
+}
+
+#' @describeIn check_pkgs Installs missing packages found by `missing_pkgs`.
+#' @export
+install_missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$", recurse = TRUE, ...) {
+  needed = missing_pkgs(dir = dir, glob = glob, recurse = recurse)
+  utils::install.packages(pkgs = needed, ...)
 }
 
 #' @describeIn check_pkgs Find all of the packages used within a project using renv.

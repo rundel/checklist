@@ -20,8 +20,8 @@ test_that("find_files", {
   )
 
   # Hidden files
-  expect_false(".gitignore" %in% find_files(".*", dir))
-  expect_true(".gitignore" %in% find_files(".*", dir, all=TRUE))
+  expect_false(".hidden" %in% find_files(".*", dir))
+  expect_true(".hidden" %in% find_files(".*", dir, all=TRUE))
 
   # Invert
   expect_false( "hw1.Rmd" %in% find_files("hw1.Rmd", dir, invert = TRUE) )
@@ -142,7 +142,7 @@ test_that("check_required_files", {
   )
 
   expect_true(
-    check_required_files(".gitignore", dir = system.file("examples/hw1", package="checklist"))
+    check_required_files(".hidden", dir = system.file("examples/hw1", package="checklist"))
   )
 
 

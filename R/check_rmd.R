@@ -12,9 +12,7 @@ check_rmd_renders = function(file, install_missing = FALSE, update_packages = FA
   file = fs::path_real(file)
 
   if (install_missing) {
-    utils::install.packages(
-      missing_pkgs(dir = fs::path_dir(file), glob = fs::path_file(file))
-    )
+    install_missing_pkgs(dir = fs::path_dir(file), glob = fs::path_file(file))
   }
 
   if (update_packages) {

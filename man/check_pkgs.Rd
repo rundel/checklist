@@ -4,6 +4,7 @@
 \alias{check_pkgs}
 \alias{installed_pkgs}
 \alias{missing_pkgs}
+\alias{install_missing_pkgs}
 \alias{find_pkgs}
 \alias{check_allowed_pkgs}
 \alias{check_disallowed_pkgs}
@@ -16,6 +17,13 @@ missing_pkgs(
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
   recurse = TRUE
+)
+
+install_missing_pkgs(
+  dir = here::here(),
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  recurse = TRUE,
+  ...
 )
 
 find_pkgs(
@@ -56,6 +64,8 @@ check_required_pkgs(
 
 \item{recurse}{Should directory be recursively explored (i.e. match files in sub directories)}
 
+\item{...}{Additional arguments passed to \code{\link[=install.packages]{install.packages()}}.}
+
 \item{full}{Should the full data frame of dependencies be returned or just a vector of package names.}
 
 \item{pkgs}{Character vector of package names}
@@ -68,6 +78,8 @@ Check for allowed or disallowed package dependencies within a project or directo
 \item \code{installed_pkgs}: Returns a vector of installed packages.
 
 \item \code{missing_pkgs}: Returns a vector of packages found by \code{find_pkgs} that are not currently installed.
+
+\item \code{install_missing_pkgs}: Installs missing packages found by \code{missing_pkgs}.
 
 \item \code{find_pkgs}: Find all of the packages used within a project using renv.
 
