@@ -23,3 +23,4 @@ Imports:
 Suggests: 
     testthat (>= 2.99.0)
 Config/testthat/edition: 3
+URL: https://rundel.github.io/checklist

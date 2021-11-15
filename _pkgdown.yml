@@ -1,5 +1,12 @@
 url: https://rundel.github.io/checklist
 
+template:
+  bootstrap: 5
+  bootswatch: litera
+  bslib:
+    primary: "#000000"
+    h2-font-size: "1.8rem"
+
 reference:
 - title: Functions
   contents:
