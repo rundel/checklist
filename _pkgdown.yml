@@ -12,4 +12,5 @@ reference:
   contents:
   - ends_with("_files")
   - ends_with("_pkgs")
+  - ends_with("_renders")
   - quit_on_failure
