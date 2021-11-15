@@ -69,7 +69,7 @@
 
 
 start -->
-<p><img src="https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"><img src="https://github.com/rundel/checklist/workflows/pkgdown/badge.svg" alt="pkgdown"><!-- badges: end --></p>
+
 <p>The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example:</p>
 <ul>
 <li>does the project compile (knit)</li>
@@ -88,57 +88,53 @@ install.packages("checklist")
 ```
 -->
 <p>You can install the the development version of this package from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"rundel/checklist"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rundel/checklist"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(checklist)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rundel.github.io/checklist">checklist</a></span><span class="op">)</span></code></pre></div>
 <p>Lets look at a simple example of the type of assignment a student might turnin, all of the files are available in <code>inst/examples/hw1</code> within this repository, if you have already installed the package then we can also find the directory using <code>system.file("examples/hw1", package="checklist")</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dir =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"examples/hw1"</span>, <span class="dt">package=</span><span class="st">"checklist"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Show the project contents</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>fs<span class="op">::</span><span class="kw">dir_tree</span>(dir)</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; /usr/local/lib/R/4.0/site-library/checklist/examples/hw1</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; ├── README.md</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; ├── fizzbuzz.png</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; ├── hw1.Rmd</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; └── hw1.Rproj</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"examples/hw1"</span>, package<span class="op">=</span><span class="st">"checklist"</span><span class="op">)</span>
+
+<span class="co"># Show the project contents</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
+<span class="co">#&gt; /usr/local/lib/R/4.1/site-library/checklist/examples/hw1</span>
+<span class="co">#&gt; ├── README.md</span>
+<span class="co">#&gt; ├── fizzbuzz.png</span>
+<span class="co">#&gt; ├── hw1.Rmd</span>
+<span class="co">#&gt; └── hw1.Rproj</span></code></pre></div>
 <p>We can now use <code>checklist</code> to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a knitted version of their homework we could use the following check:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">check_required_files</span>(<span class="st">"hw1.md"</span>, dir)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; The following required files are missing:</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; x hw1.md</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/check_files.html">check_required_files</a></span><span class="op">(</span><span class="st">"hw1.md"</span>, <span class="va">dir</span><span class="op">)</span>
+<span class="co">#&gt; The following required files are missing:</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; x hw1.md</span></code></pre></div>
 <p>Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicity with</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">check_disallowed_files</span>(<span class="st">"hw1.md"</span>, dir)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/check_files.html">check_disallowed_files</a></span><span class="op">(</span><span class="st">"hw1.md"</span>, <span class="va">dir</span><span class="op">)</span></code></pre></div>
 <p>Alternatively we may instead want to explicity about what files are allowed (ensuring students have not added or renamed anything), then we can</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">check_allowed_files</span>(<span class="kw">c</span>(<span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>), dir)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span><span class="op">)</span></code></pre></div>
 <p>By default the package ignores hidden files (files whose name starts with a <code>.</code>) but we can also check for these as well using the <code>all = TRUE</code> argument.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">check_allowed_files</span>(<span class="kw">c</span>(<span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>), dir, <span class="dt">all =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; x .Rhistory</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0A29983A</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/0BC2306D</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/prop/INDEX</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/56A65601-contents</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/7DDE3DD5-contents</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; x .Rproj.user/AF10DFE7/sources/s-A1C8B866/lock_file</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/AF10DFE7A1C8B866/chunks.json</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/69FC5FF3-hw1/1/s/chunks.json</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/patch-chunk-names</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; x .Rproj.user/shared/notebooks/paths</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; x .gitignore</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Disallowed files found: (please remove the following files)</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; x .hidden</span></code></pre></div>
 <p>To refine this, we may want to allow <code>.gitignore</code> as well as the <code>.Rproj.user/</code> folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">check_allowed_files</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="kw">c</span>(<span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>, <span class="st">".gitignore"</span>, <span class="st">".Rproj.user/*"</span>), </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  dir, <span class="dt">all =</span> <span class="ot">TRUE</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>)</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; x .Rhistory</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>, <span class="st">".gitignore"</span>, <span class="st">".Rproj.user/*"</span><span class="op">)</span>, 
+  <span class="va">dir</span>, all <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="co">#&gt; Disallowed files found: (please remove the following files)</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; x .hidden</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -158,7 +154,14 @@ install.packages("checklist")
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22"><img src="https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22"><img src="https://github.com/rundel/checklist/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
