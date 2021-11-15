@@ -14,8 +14,8 @@
       x B
       x C
       x D
-      x rmarkdown
       x F
+      x rmarkdown
 
 ---
 
@@ -25,8 +25,8 @@
       Disallowed packages used:
       --------------------------------------------------------------------------------
       x D
-      x rmarkdown
       x F
+      x rmarkdown
 
 # check_disallowed_pkgs
 
