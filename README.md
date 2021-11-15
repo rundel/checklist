@@ -4,7 +4,10 @@
 checklist
 =========
 
-<!-- badges: start -->
+<!-- badges: [![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22) [![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22)
+
+
+start -->
 
 ![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)
 ![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)
