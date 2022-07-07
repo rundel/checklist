@@ -39,7 +39,7 @@ find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|
   files = fs::path_real(files) # need abs paths for renv
   dir = fs::path_real(dir)
 
-  if (length(files) == 0)
+  if (length(files) == 0 && recurse)
     files = dir
 
   deps = unique(renv::dependencies(files, root = dir, progress = FALSE, errors = "fatal"))
