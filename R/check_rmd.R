@@ -32,7 +32,7 @@ check_rmd_renders = function(file, install_missing = FALSE, update_packages = FA
 #' @param ... Additional arguments to pass to `quarto_render()`
 #'
 #' @export
-check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {
+check_qmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {
   if (!fs::file_exists(file))
     stop("File: ", file, " could not be found.", call. = FALSE)
 
