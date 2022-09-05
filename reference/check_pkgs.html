@@ -49,20 +49,20 @@
 <span></span>
 <span><span class="fu">missing_pkgs</span><span class="op">(</span></span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">install_missing_pkgs</span><span class="op">(</span></span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">find_pkgs</span><span class="op">(</span></span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  full <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -70,7 +70,7 @@
 <span><span class="fu">check_allowed_pkgs</span><span class="op">(</span></span>
 <span>  <span class="va">pkgs</span>,</span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  full <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -78,7 +78,7 @@
 <span><span class="fu">check_disallowed_pkgs</span><span class="op">(</span></span>
 <span>  <span class="va">pkgs</span>,</span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  full <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -86,7 +86,7 @@
 <span><span class="fu">check_required_pkgs</span><span class="op">(</span></span>
 <span>  <span class="va">pkgs</span>,</span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$"</span>,</span>
+<span>  glob <span class="op">=</span> <span class="st">"*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$"</span>,</span>
 <span>  full <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -121,13 +121,13 @@
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
     
-<ul><li><p><code>installed_pkgs</code>: Returns a vector of installed packages.</p></li>
-<li><p><code>missing_pkgs</code>: Returns a vector of packages found by <code>find_pkgs</code> that are not currently installed.</p></li>
-<li><p><code>install_missing_pkgs</code>: Installs missing packages found by <code>missing_pkgs</code>.</p></li>
-<li><p><code>find_pkgs</code>: Find all of the packages used within a project using renv.</p></li>
-<li><p><code>check_allowed_pkgs</code>: Check that only the allowed packages are used</p></li>
-<li><p><code>check_disallowed_pkgs</code>: Check if any disallowed packages are used</p></li>
-<li><p><code>check_required_pkgs</code>: Check that the required packages are used</p></li>
+<ul><li><p><code>installed_pkgs()</code>: Returns a vector of installed packages.</p></li>
+<li><p><code>missing_pkgs()</code>: Returns a vector of packages found by <code>find_pkgs</code> that are not currently installed.</p></li>
+<li><p><code>install_missing_pkgs()</code>: Installs missing packages found by <code>missing_pkgs</code>.</p></li>
+<li><p><code>find_pkgs()</code>: Find all of the packages used within a project using renv.</p></li>
+<li><p><code>check_allowed_pkgs()</code>: Check that only the allowed packages are used</p></li>
+<li><p><code>check_disallowed_pkgs()</code>: Check if any disallowed packages are used</p></li>
+<li><p><code>check_required_pkgs()</code>: Check that the required packages are used</p></li>
 </ul></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
