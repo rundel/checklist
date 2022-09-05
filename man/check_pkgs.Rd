@@ -15,20 +15,20 @@ installed_pkgs()
 
 missing_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   recurse = TRUE
 )
 
 install_missing_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   recurse = TRUE,
   ...
 )
 
 find_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   full = FALSE,
   recurse = TRUE
 )
@@ -36,7 +36,7 @@ find_pkgs(
 check_allowed_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   full = FALSE,
   recurse = TRUE
 )
@@ -44,7 +44,7 @@ check_allowed_pkgs(
 check_disallowed_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   full = FALSE,
   recurse = TRUE
 )
@@ -52,7 +52,7 @@ check_disallowed_pkgs(
 check_required_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw$",
+  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
   full = FALSE,
   recurse = TRUE
 )
@@ -75,18 +75,18 @@ Check for allowed or disallowed package dependencies within a project or directo
 }
 \section{Functions}{
 \itemize{
-\item \code{installed_pkgs}: Returns a vector of installed packages.
+\item \code{installed_pkgs()}: Returns a vector of installed packages.
 
-\item \code{missing_pkgs}: Returns a vector of packages found by \code{find_pkgs} that are not currently installed.
+\item \code{missing_pkgs()}: Returns a vector of packages found by \code{find_pkgs} that are not currently installed.
 
-\item \code{install_missing_pkgs}: Installs missing packages found by \code{missing_pkgs}.
+\item \code{install_missing_pkgs()}: Installs missing packages found by \code{missing_pkgs}.
 
-\item \code{find_pkgs}: Find all of the packages used within a project using renv.
+\item \code{find_pkgs()}: Find all of the packages used within a project using renv.
 
-\item \code{check_allowed_pkgs}: Check that only the allowed packages are used
+\item \code{check_allowed_pkgs()}: Check that only the allowed packages are used
 
-\item \code{check_disallowed_pkgs}: Check if any disallowed packages are used
+\item \code{check_disallowed_pkgs()}: Check if any disallowed packages are used
 
-\item \code{check_required_pkgs}: Check that the required packages are used
+\item \code{check_required_pkgs()}: Check that the required packages are used
+
 }}
-

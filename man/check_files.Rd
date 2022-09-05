@@ -53,13 +53,13 @@ Check for allowed or disallowed files in a project or directory
 }
 \section{Functions}{
 \itemize{
-\item \code{find_files}: Find all files that match the given pattern (glob or regex)
+\item \code{find_files()}: Find all files that match the given pattern (glob or regex)
 within the given directory
 
-\item \code{check_allowed_files}: Check that only the allowed file(s) exist
+\item \code{check_allowed_files()}: Check that only the allowed file(s) exist
 
-\item \code{check_disallowed_files}: Check if any disallowed file(s) exist
+\item \code{check_disallowed_files()}: Check if any disallowed file(s) exist
 
-\item \code{check_required_files}: Check that the required file(s) exist
+\item \code{check_required_files()}: Check that the required file(s) exist
+
 }}
-
