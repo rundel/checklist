@@ -46,5 +46,5 @@ check_qmd_renders = function(file, install_missing = FALSE, update_packages = FA
     remotes::update_packages(upgrade = "always")
   }
 
-  quarto::quarto_render(file, quiet = TRUE, ...)
+  quarto::quarto_render(file, ...)
 }
