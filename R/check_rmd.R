@@ -6,7 +6,7 @@
 #' @param ... Additional arguments to pass to `render()`
 #'
 #' @export
-check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE) {
+check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {
   if (!fs::file_exists(file))
     stop("File: ", file, " could not be found.", call. = FALSE)
 

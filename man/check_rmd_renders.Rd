@@ -4,7 +4,7 @@
 \alias{check_rmd_renders}
 \title{Check an Rmd file renders using rmarkdown}
 \usage{
-check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE)
+check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 }
 \arguments{
 \item{file}{Path of an Rmd file}

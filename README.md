@@ -3,13 +3,11 @@
 
 # checklist
 
-<!-- badges: [![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22) [![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22)
-
-
-start -->
+<!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22)
 [![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22)
+[![R-CMD-check](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of this package is to provide a variety of tools for checking
@@ -17,17 +15,16 @@ RStudio project based assignments. These tools are not specifically
 about testing for the correctness of an assignment, but rather about
 testing the process and reproducibility of that assignment. For example:
 
--   does the project compile (knit)
--   does the project only include the files want
--   does the include Rmd document have the correct structure
--   and many more
+- does the project compile (knit)
+- does the project only include the files want
+- does the include Rmd document have the correct structure
+- and many more
 
 ## Installation
 
 <!--
 You can install the released version of checklist from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
+&#10;``` r
 install.packages("checklist")
 ```
 -->
@@ -57,7 +54,7 @@ dir = system.file("examples/hw1", package="checklist")
 
 # Show the project contents
 fs::dir_tree(dir)
-#> /usr/local/lib/R/4.1/site-library/checklist/examples/hw1
+#> /Users/rundel/Library/R/arm64/4.3/library/checklist/examples/hw1
 #> ├── README.md
 #> ├── fizzbuzz.png
 #> ├── hw1.Rmd
@@ -73,7 +70,7 @@ check:
 check_required_files("hw1.md", dir)
 #> The following required files are missing:
 #> ────────────────────────────────────────────────────────────────────────────────
-#> x hw1.md
+#> ✖ hw1.md
 ```
 
 Alternatively, we may want to prevent the students from turning in a
@@ -100,7 +97,7 @@ with a `.`) but we can also check for these as well using the
 check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
 #> Disallowed files found: (please remove the following files)
 #> ────────────────────────────────────────────────────────────────────────────────
-#> x .hidden
+#> ✖ .hidden
 ```
 
 To refine this, we may want to allow `.gitignore` as well as the
@@ -114,5 +111,5 @@ check_allowed_files(
 )
 #> Disallowed files found: (please remove the following files)
 #> ────────────────────────────────────────────────────────────────────────────────
-#> x .hidden
+#> ✖ .hidden
 ```
