@@ -8,7 +8,7 @@
 
     Code
       check_allowed_pkgs("A", pkg_dir)
-    Message <cliMessage>
+    Message
       Disallowed packages used:
       --------------------------------------------------------------------------------
       x B
@@ -21,7 +21,7 @@
 
     Code
       check_allowed_pkgs(c("A", "B", "C"), pkg_dir)
-    Message <cliMessage>
+    Message
       Disallowed packages used:
       --------------------------------------------------------------------------------
       x D
@@ -32,7 +32,7 @@
 
     Code
       check_disallowed_pkgs(c("A", "B"), pkg_dir)
-    Message <cliMessage>
+    Message
       Disallowed packages used:
       --------------------------------------------------------------------------------
       x A
@@ -42,7 +42,7 @@
 
     Code
       check_disallowed_pkgs(c("A", "Z"), pkg_dir)
-    Message <cliMessage>
+    Message
       Disallowed packages used:
       --------------------------------------------------------------------------------
       x A
@@ -61,7 +61,7 @@
 
     Code
       check_required_pkgs(c("A", "Z"), pkg_dir)
-    Message <cliMessage>
+    Message
       The following required packages were not used:
       --------------------------------------------------------------------------------
       x Z
@@ -70,7 +70,7 @@
 
     Code
       check_required_pkgs(c("Y", "Z"), pkg_dir)
-    Message <cliMessage>
+    Message
       The following required packages were not used:
       --------------------------------------------------------------------------------
       x Y
