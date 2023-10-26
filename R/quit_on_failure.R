@@ -24,3 +24,35 @@ quit_on_failure = function(expr, n_br = 1) {
 
   invisible(expr)
 }
+
+
+#' Handle runtime errors
+#'
+#' Evaluates the given expression and then runs the `on_success`, `on_error`, or `on_warning`
+#' expressions depending on the result of the initial evaluation.
+#'
+#' @param expr Expression to evaluate
+#' @param on_success Expression to evaluate if `expr` succeeds
+#' @param on_error Expression to evaluate if `expr` generates an error
+#' @param on_warning Expression to evaluate if `expr` generates a warning
+#' @param finally Expression to evaluate after `expr` and `on_success` or `on_error` or `on_warning`,
+#' usually used for cleanup.
+#'
+#' @return Invisible result of `expr`
+#'
+#' @export
+#'
+handle_error = function(expr, on_success = {}, on_error = {}, on_warning = {}, finally = {}) {
+  tryCatch({
+    res = force(expr)
+    force(on_success)
+  }, error = function(e) {
+    force(on_error)
+  }, warning = function(w) {
+    force(on_warning)
+  }, finally = {
+    force(finally)
+  })
+
+  invisible(res)
+}

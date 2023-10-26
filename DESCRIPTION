@@ -1,6 +1,6 @@
 Package: checklist
 Title: A package for running checks on projects and other assignments
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Colin",
            family = "Rundel",
