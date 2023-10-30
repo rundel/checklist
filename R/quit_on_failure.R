@@ -38,21 +38,24 @@ quit_on_failure = function(expr, n_br = 1) {
 #' @param finally Expression to evaluate after `expr` and `on_success` or `on_error` or `on_warning`,
 #' usually used for cleanup.
 #'
-#' @return Invisible result of `expr`
+#' @return Invisible result of `expr` if it succeeds, otherwise the error or warning object.
 #'
 #' @export
 #'
 handle_error = function(expr, on_success = {}, on_error = {}, on_warning = {}, finally = {}) {
-  tryCatch({
-    res = force(expr)
-    force(on_success)
-  }, error = function(e) {
-    force(on_error)
-  }, warning = function(w) {
-    force(on_warning)
-  }, finally = {
-    force(finally)
-  })
-
-  invisible(res)
+  invisible(
+    tryCatch({
+      res = expr
+      on_success
+      res
+    }, error = function(e) {
+      on_error
+      e
+    }, warning = function(w) {
+      on_warning
+      w
+    }, finally = {
+      finally
+    })
+  )
 }

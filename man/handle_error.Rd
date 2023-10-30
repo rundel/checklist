@@ -29,7 +29,7 @@ handle_error(
 usually used for cleanup.}
 }
 \value{
-Invisible result of \code{expr}
+Invisible result of \code{expr} if it succeeds, otherwise the error or warning object.
 }
 \description{
 Evaluates the given expression and then runs the \code{on_success}, \code{on_error}, or \code{on_warning}
