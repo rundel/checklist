@@ -1,0 +1,134 @@
+# checklist
+
+The goal of this package is to provide a variety of tools for checking
+RStudio project based assignments. These tools are not specifically
+about testing for the correctness of an assignment, but rather about
+testing the process and reproducibility of that assignment. For example:
+
+- does the project compile (knit)
+- does the project only include the files want
+- does the include Rmd document have the correct structure
+- and many more
+
+## Installation
+
+You can install the the development version of this package from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("rundel/checklist")
+```
+
+## Example
+
+``` r
+library(checklist)
+```
+
+Lets look at a simple example of the type of assignment a student might
+turnin, all of the files are available in `inst/examples/hw1` within
+this repository, if you have already installed the package then we can
+also find the directory using
+`system.file("examples/hw1", package="checklist")`.
+
+``` r
+dir = system.file("examples/hw1", package="checklist")
+
+# Show the project contents
+fs::dir_tree(dir)
+#> /Users/rundel/Library/R/arm64/4.3/library/checklist/examples/hw1
+#> ├── README.md
+#> ├── fizzbuzz.png
+#> ├── hw1.Rmd
+#> └── hw1.Rproj
+```
+
+We can now use `checklist` to express simple checks for the files in
+this directory. For example if we wanted to make sure that the students
+submit a knitted version of their homework we could use the following
+check:
+
+``` r
+check_required_files("hw1.md", dir)
+#> The following required files are missing:
+#> ────────────────────────────────────────────────────────────────────────────────
+#> ✖ hw1.md
+```
+
+Alternatively, we may want to prevent the students from turning in a
+knitted version (to check the reproducibility of their work) and this
+can be done explicity with
+
+``` r
+check_disallowed_files("hw1.md", dir)
+```
+
+Alternatively we may instead want to explicity about what files are
+allowed (ensuring students have not added or renamed anything), then we
+can
+
+``` r
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+```
+
+By default the package ignores hidden files (files whose name starts
+with a `.`) but we can also check for these as well using the
+`all = TRUE` argument.
+
+``` r
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
+#> Disallowed files found: (please remove the following files)
+#> ────────────────────────────────────────────────────────────────────────────────
+#> ✖ .hidden
+```
+
+To refine this, we may want to allow `.gitignore` as well as the
+`.Rproj.user/` folder. These can be added to the files argument and we
+can even use standard glob wildcards to make our life easier,
+
+``` r
+check_allowed_files(
+  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"), 
+  dir, all = TRUE
+)
+#> Disallowed files found: (please remove the following files)
+#> ────────────────────────────────────────────────────────────────────────────────
+#> ✖ .hidden
+```
+
+# Package index
+
+## Functions
+
+- [`find_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  [`check_allowed_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  [`check_disallowed_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  [`check_required_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  : Check for allowed or disallowed files in a project or directory
+
+- [`installed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`missing_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`install_missing_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`find_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`check_allowed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`check_disallowed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`check_required_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  :
+
+  Check for allowed or disallowed package dependencies within a project
+  or directory using
+  [`pak::scan_deps()`](https://pak.r-lib.org/reference/scan_deps.html).
+
+- [`check_qmd_renders()`](https://rundel.github.io/checklist/reference/check_qmd_renders.md)
+  : Check a qmd file renders using Quarto
+
+- [`check_rmd_renders()`](https://rundel.github.io/checklist/reference/check_rmd_renders.md)
+  : Check an Rmd file renders using rmarkdown
+
+- [`quit_on_failure()`](https://rundel.github.io/checklist/reference/quit_on_failure.md)
+  : Quit on Failure
+
+- [`handle_error()`](https://rundel.github.io/checklist/reference/handle_error.md)
+  : Handle runtime errors
+
