@@ -1,4 +1,4 @@
-#' Check for allowed or disallowed package dependencies within a project or directory
+#' Check for allowed or disallowed package dependencies within a project or directory using `pak::scan_deps()`.
 #'
 #' @param pkgs Character vector of package names
 #' @param dir Directory to search.
@@ -42,10 +42,10 @@ find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|
   if (length(files) == 0 && recurse)
     files = dir
 
-  deps = unique(renv::dependencies(files, root = dir, progress = FALSE, errors = "fatal"))
+  deps = unique(pak::scan_deps(path = files, root = dir)[])
 
   if (!full)
-    deps = unique(deps$Package)
+    deps = unique(deps$package)
 
   deps
 }

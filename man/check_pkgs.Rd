@@ -9,7 +9,7 @@
 \alias{check_allowed_pkgs}
 \alias{check_disallowed_pkgs}
 \alias{check_required_pkgs}
-\title{Check for allowed or disallowed package dependencies within a project or directory}
+\title{Check for allowed or disallowed package dependencies within a project or directory using \code{pak::scan_deps()}.}
 \usage{
 installed_pkgs()
 
@@ -71,7 +71,7 @@ check_required_pkgs(
 \item{pkgs}{Character vector of package names}
 }
 \description{
-Check for allowed or disallowed package dependencies within a project or directory
+Check for allowed or disallowed package dependencies within a project or directory using \code{pak::scan_deps()}.
 }
 \section{Functions}{
 \itemize{
