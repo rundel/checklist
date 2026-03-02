@@ -22,6 +22,34 @@ test_that("find_pkgs", {
   )
 })
 
+test_that("find_pkgs full = TRUE", {
+  res = find_pkgs(pkg_dir, full = TRUE)
+
+  expect_s3_class(res, "data.frame")
+  expect_named(res, c("path", "ref", "package", "version", "type", "code", "start_row", "start_column", "start_byte"))
+  expect_equal(nrow(res), 10)
+  expect_equal(sort(unique(res$package)), c("A", "B", "C", "D", "F", "rmarkdown"))
+})
+
+test_that("find_pkgs recurse = FALSE", {
+  expect_equal(
+    find_pkgs(pkg_dir, recurse = FALSE),
+    character(0)
+  )
+})
+
+test_that("find_pkgs with no matching files", {
+  expect_equal(
+    find_pkgs(pkg_dir, glob = "*.py"),
+    character(0)
+  )
+
+  expect_equal(
+    find_pkgs(pkg_dir, glob = "*.py", full = TRUE),
+    find_pkgs(pkg_dir, full = TRUE)[0, ]
+  )
+})
+
 test_that("check_allowed_pkgs", {
   expect_true(
     check_allowed_pkgs(c("A", "B", "C", "D", "rmarkdown", "F"), pkg_dir)
@@ -124,7 +152,7 @@ test_that("check_required_pkgs", {
 })
 
 test_that("missing_pkgs", {
-  expect_equal(missing_pkgs(pkg_dir), c("A", "B", "C", "D", "F"))
+  expect_equal(sort(missing_pkgs(pkg_dir)), c("A", "B", "C", "D", "F"))
 
   expect_equal(
     missing_pkgs(system.file("examples/hw1", package = "checklist")),

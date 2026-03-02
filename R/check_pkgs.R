@@ -36,13 +36,12 @@ install_missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.r
 #' @export
 find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", full = FALSE, recurse = TRUE) {
   files = fs::dir_ls(path = dir, glob = glob, recurse = recurse,  type = "file")
-  files = fs::path_real(files) # need abs paths for renv
   dir = fs::path_real(dir)
+  files = fs::path_real(files)
 
-  if (length(files) == 0 && recurse)
-    files = dir
-
-  deps = unique(pak::scan_deps(path = files, root = dir)[])
+  deps = pak::scan_deps(path = dir, root = dir)[]
+  deps = deps[fs::path_real(fs::path(dir, deps$path)) %in% files, ]
+  deps = unique(deps)
 
   if (!full)
     deps = unique(deps$package)
