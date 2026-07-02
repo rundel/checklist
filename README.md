@@ -16,8 +16,8 @@ about testing for the correctness of an assignment, but rather about
 testing the process and reproducibility of that assignment. For example:
 
 - does the project compile (knit)
-- does the project only include the files want
-- does the include Rmd document have the correct structure
+- does the project only include the files we want
+- does the included Rmd document have the correct structure
 - and many more
 
 ## Installation
@@ -29,7 +29,7 @@ install.packages("checklist")
 ```
 -->
 
-You can install the the development version of this package from
+You can install the development version of this package from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -44,9 +44,9 @@ library(checklist)
 ```
 
 Lets look at a simple example of the type of assignment a student might
-turnin, all of the files are available in `inst/examples/hw1` within
-this repository, if you have already installed the package then we can
-also find the directory using
+turn in. All of the files are available in `inst/examples/hw1` within
+this repository, and if you have already installed the package then we
+can also find the directory using
 `system.file("examples/hw1", package="checklist")`.
 
 ``` r
@@ -54,7 +54,7 @@ dir = system.file("examples/hw1", package="checklist")
 
 # Show the project contents
 fs::dir_tree(dir)
-#> /Users/rundel/Library/R/arm64/4.3/library/checklist/examples/hw1
+#> /private/var/folders/v7/wrxd7cdj6l5gzr0191__m9lr0000gr/T/RtmpV6sOzZ/temp_libpath309c549e67a/checklist/examples/hw1
 #> ├── README.md
 #> ├── fizzbuzz.png
 #> ├── hw1.Rmd
@@ -75,13 +75,13 @@ check_required_files("hw1.md", dir)
 
 Alternatively, we may want to prevent the students from turning in a
 knitted version (to check the reproducibility of their work) and this
-can be done explicity with
+can be done explicitly with
 
 ``` r
 check_disallowed_files("hw1.md", dir)
 ```
 
-Alternatively we may instead want to explicity about what files are
+Alternatively we may instead want to be explicit about what files are
 allowed (ensuring students have not added or renamed anything), then we
 can
 

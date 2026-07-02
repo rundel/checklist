@@ -23,8 +23,8 @@ knitr::opts_chunk$set(
 The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example: 
 
 * does the project compile (knit)
-* does the project only include the files want
-* does the include Rmd document have the correct structure
+* does the project only include the files we want
+* does the included Rmd document have the correct structure
 * and many more
 
 
@@ -38,7 +38,7 @@ install.packages("checklist")
 ```
 -->
 
-You can install the the development version of this package from [GitHub](https://github.com/) with:
+You can install the development version of this package from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -51,7 +51,7 @@ devtools::install_github("rundel/checklist")
 library(checklist)
 ```
 
-Lets look at a simple example of the type of assignment a student might turnin, all of the files are available in `inst/examples/hw1` within this repository, if you have already installed the package then we can also find the directory using `system.file("examples/hw1", package="checklist")`.
+Lets look at a simple example of the type of assignment a student might turn in. All of the files are available in `inst/examples/hw1` within this repository, and if you have already installed the package then we can also find the directory using `system.file("examples/hw1", package="checklist")`.
 
 ```{r}
 dir = system.file("examples/hw1", package="checklist")
@@ -66,13 +66,13 @@ We can now use `checklist` to express simple checks for the files in this direct
 check_required_files("hw1.md", dir)
 ```
 
-Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicity with
+Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicitly with
 
 ```{r}
 check_disallowed_files("hw1.md", dir)
 ```
 
-Alternatively we may instead want to explicity about what files are allowed (ensuring students have not added or renamed anything), then we can
+Alternatively we may instead want to be explicit about what files are allowed (ensuring students have not added or renamed anything), then we can
 
 ```{r}
 check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
