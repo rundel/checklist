@@ -1,7 +1,7 @@
 # check_allowed_files
 
     Code
-      check_allowed_files(c("hw1.Rmd", "hw1.Rproj", "README.md"), dir = system.file(
+      check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"), dir = system.file(
         "examples/hw1", package = "checklist"))
     Message
       Disallowed files found: (please remove the following files)
@@ -17,17 +17,17 @@
       --------------------------------------------------------------------------------
       x README.md
       x fizzbuzz.png
-      x hw1.Rmd
       x hw1.Rproj
+      x hw1.qmd
 
 # check_disallowed_files
 
     Code
-      check_disallowed_files("hw1.Rmd", dir = system.file("examples/hw1", package = "checklist"))
+      check_disallowed_files("hw1.qmd", dir = system.file("examples/hw1", package = "checklist"))
     Message
       Disallowed files found: (please remove the following files)
       --------------------------------------------------------------------------------
-      x hw1.Rmd
+      x hw1.qmd
 
 ---
 
@@ -47,28 +47,28 @@
 ---
 
     Code
-      check_disallowed_files(c("hw1.Rmd", "hw1.md"), dir = system.file("examples/hw1",
+      check_disallowed_files(c("hw1.qmd", "hw1.md"), dir = system.file("examples/hw1",
         package = "checklist"))
     Message
       Disallowed files found: (please remove the following files)
       --------------------------------------------------------------------------------
-      x hw1.Rmd
+      x hw1.qmd
 
 ---
 
     Code
-      check_disallowed_files(c("hw1.Rmd", "hw1.Rproj"), dir = system.file(
+      check_disallowed_files(c("hw1.Rproj", "hw1.qmd"), dir = system.file(
         "examples/hw1", package = "checklist"))
     Message
       Disallowed files found: (please remove the following files)
       --------------------------------------------------------------------------------
-      x hw1.Rmd
       x hw1.Rproj
+      x hw1.qmd
 
 # check_required_files
 
     Code
-      check_required_files(c("hw1.md", "hw1.Rmd"), dir = system.file("examples/hw1",
+      check_required_files(c("hw1.md", "hw1.qmd"), dir = system.file("examples/hw1",
         package = "checklist"))
     Message
       The following required files are missing:
@@ -78,6 +78,6 @@
 ---
 
     Code
-      check_required_files(c("hw1.Rproj", "hw1.Rmd"), dir = system.file(
+      check_required_files(c("hw1.Rproj", "hw1.qmd"), dir = system.file(
         "examples/hw1", package = "checklist"))
 

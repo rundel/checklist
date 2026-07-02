@@ -22,7 +22,7 @@ Your goal here is to implement FizzBuzz as a generalized function in R called `f
 
 You must also include a write up of your implementation that broadly describes how you approached the problem and constructed your solution (think something along the lines of the methods section of a journal article). 
 
-This is not a terribly complex or difficult task, and solutions in R and many other languages are easily Googleable - the point of this exercise is to get use to the workflow and tools we will be using in this class. This includes RStudio, RMarkdown, git, GitHub, etc. - so use this ungraded homework as opportunity to familiarize yourself and get comfortable with these tools as we will be using them throughout the rest of the semester.
+This is not a terribly complex or difficult task, and solutions in R and many other languages are easily Googleable - the point of this exercise is to get use to the workflow and tools we will be using in this class. This includes RStudio, Quarto, git, GitHub, etc. - so use this ungraded homework as opportunity to familiarize yourself and get comfortable with these tools as we will be using them throughout the rest of the semester.
 
 Detailed requirements for input validation:
 * Input must be a numeric vector (either double or integer)
@@ -43,7 +43,7 @@ Test if your FizzBuzz function displays the correct output for a variety of inpu
 
 This homework will not be graded however, you are encouraged to complete the assignment as an individual and to keep everything (code, write ups, etc.) on your personal repository (commit & push early and often). 
 
-The final product for this assignment should be a single Rmd document (a template of which is provided in your repo) that contains all code and text for the tasks described above. This document should be clearly and cleanly formated and present all of your results. Style and formating will count for future assignments, so please take the time to make sure everything looks good and your text and code are properly formated. 
+The final product for this assignment should be a single qmd document (a template of which is provided in your repo) that contains all code and text for the tasks described above. This document should be clearly and cleanly formated and present all of your results. Style and formating will count for future assignments, so please take the time to make sure everything looks good and your text and code are properly formated. 
 
 In this class we will not be enforcing any particular coding style, however it is important that the code you produce is *readable* and *consistent* in its formating. There are several R style guides online, e.g. from [Google](https://google.github.io/styleguide/Rguide.xml) and from the [tidyverse team](https://style.tidyverse.org/) that are a good place to start.
 

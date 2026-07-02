@@ -1,6 +1,6 @@
 ---
 title: "Homework 1"
-output: github_document
+format: gfm
 author: Jane Doe Student
 ---
 

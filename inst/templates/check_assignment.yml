@@ -10,13 +10,12 @@ jobs:
       uses: actions/checkout@v7
     - name: Install checklist
       run: |
-        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
         installGithub.r rundel/checklist
       shell: bash
     - name: Check Files
       run: |
         checklist::quit_on_failure({
-          checklist::check_allowed_files(c("hw1.Rmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
         })
       shell: Rscript {0}
   check-renders:
@@ -26,12 +25,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v7
-    - name: Install checklist
+    - name: Install quarto and checklist
       run: |
-        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        apt-get update -qq && apt-get install -y --no-install-recommends wget
+        wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb
+        apt-get install -y ./quarto-1.8.27-linux-amd64.deb && rm quarto-*.deb
         installGithub.r rundel/checklist
       shell: bash
     - name: Check Renders
       run: |
-        checklist::check_rmd_renders("hw1.Rmd", install_missing = TRUE)
+        checklist::check_qmd_renders("hw1.qmd", install_missing = TRUE)
       shell: Rscript {0}

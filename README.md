@@ -16,9 +16,9 @@ RStudio project based assignments. These tools are not specifically
 about testing for the correctness of an assignment, but rather about
 testing the process and reproducibility of that assignment. For example:
 
-- does the project compile (knit)
+- does the project compile (render)
 - does the project only include the files we want
-- does the included Rmd document have the correct structure
+- does the included qmd document have the correct structure
 - and many more
 
 ## Installation
@@ -58,13 +58,13 @@ fs::dir_tree("inst/examples/hw1")
 #> inst/examples/hw1
 #> ├── README.md
 #> ├── fizzbuzz.png
-#> ├── hw1.Rmd
-#> └── hw1.Rproj
+#> ├── hw1.Rproj
+#> └── hw1.qmd
 ```
 
 We can now use `checklist` to express simple checks for the files in
 this directory. For example if we wanted to make sure that the students
-submit a knitted version of their homework we could use the following
+submit a rendered version of their homework we could use the following
 check:
 
 ``` r
@@ -75,7 +75,7 @@ check_required_files("hw1.md", dir)
 ```
 
 Alternatively, we may want to prevent the students from turning in a
-knitted version (to check the reproducibility of their work) and this
+rendered version (to check the reproducibility of their work) and this
 can be done explicitly with
 
 ``` r
@@ -87,7 +87,7 @@ allowed (ensuring students have not added or renamed anything), then we
 can
 
 ``` r
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
 By default the package ignores hidden files (files whose name starts
@@ -95,7 +95,7 @@ with a `.`) but we can also check for these as well using the
 `all = TRUE` argument.
 
 ``` r
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
 #> Disallowed files found: (please remove the following files)
 #> ────────────────────────────────────────────────────────────────────────────────
 #> ✖ .hidden
@@ -107,7 +107,7 @@ can even use standard glob wildcards to make our life easier,
 
 ``` r
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
+  c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 #> Disallowed files found: (please remove the following files)
@@ -140,13 +140,12 @@ jobs:
       uses: actions/checkout@v7
     - name: Install checklist
       run: |
-        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
         installGithub.r rundel/checklist
       shell: bash
     - name: Check Files
       run: |
         checklist::quit_on_failure({
-          checklist::check_allowed_files(c("hw1.Rmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
         })
       shell: Rscript {0}
   check-renders:
@@ -156,13 +155,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v7
-    - name: Install checklist
+    - name: Install quarto and checklist
       run: |
-        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        apt-get update -qq && apt-get install -y --no-install-recommends wget
+        wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb
+        apt-get install -y ./quarto-1.8.27-linux-amd64.deb && rm quarto-*.deb
         installGithub.r rundel/checklist
       shell: bash
     - name: Check Renders
       run: |
-        checklist::check_rmd_renders("hw1.Rmd", install_missing = TRUE)
+        checklist::check_qmd_renders("hw1.qmd", install_missing = TRUE)
       shell: Rscript {0}
 ```

@@ -1,5 +1,7 @@
 # checklist 0.2.0
 
+* The example assignments in `inst/examples/` now use Quarto (`qmd`) documents instead of R Markdown, and an example GitHub Actions workflow is included in `inst/templates/`.
+
 * Renamed the `glob` argument to `regexp` in `find_pkgs()`, `missing_pkgs()`, `install_missing_pkgs()`, and the `check_*_pkgs()` functions; file selection now uses a regular expression.
 
 * Removed the unused `full` argument from `check_allowed_pkgs()`, `check_disallowed_pkgs()`, and `check_required_pkgs()`.

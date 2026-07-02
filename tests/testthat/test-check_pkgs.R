@@ -12,7 +12,7 @@ test_that("find_pkgs", {
   )
 
   expect_equal(
-    sort(find_pkgs(pkg_dir, regexp = "[.]Rmd$")),
+    sort(find_pkgs(pkg_dir, regexp = "[.]qmd$")),
     c("A","B","C","D","F", "rmarkdown")
   )
 

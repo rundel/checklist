@@ -19,9 +19,9 @@ knitr:
 
 The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example:
 
-* does the project compile (knit)
+* does the project compile (render)
 * does the project only include the files we want
-* does the included Rmd document have the correct structure
+* does the included qmd document have the correct structure
 * and many more
 
 
@@ -57,13 +57,13 @@ dir = system.file("examples/hw1", package="checklist")
 fs::dir_tree("inst/examples/hw1")
 ```
 
-We can now use `checklist` to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a knitted version of their homework we could use the following check:
+We can now use `checklist` to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a rendered version of their homework we could use the following check:
 
 ```{r}
 check_required_files("hw1.md", dir)
 ```
 
-Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicitly with
+Alternatively, we may want to prevent the students from turning in a rendered version (to check the reproducibility of their work) and this can be done explicitly with
 
 ```{r}
 check_disallowed_files("hw1.md", dir)
@@ -72,20 +72,20 @@ check_disallowed_files("hw1.md", dir)
 Alternatively we may instead want to be explicit about what files are allowed (ensuring students have not added or renamed anything), then we can
 
 ```{r}
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
 By default the package ignores hidden files (files whose name starts with a `.`) but we can also check for these as well using the `all = TRUE` argument.
 
 ```{r}
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir, all = TRUE)
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
 ```
 
 To refine this, we may want to allow `.gitignore` as well as the `.Rproj.user/` folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,
 
 ```{r}
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
+  c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 ```

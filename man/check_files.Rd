@@ -71,9 +71,9 @@ within the given directory
 \examples{
 dir = system.file("examples/hw1", package = "checklist")
 
-find_files("*.Rmd", dir)
+find_files("*.qmd", dir)
 
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
 check_disallowed_files("hw1.md", dir)
 check_required_files("hw1.pdf", dir)
 
