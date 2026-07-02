@@ -5,18 +5,17 @@ test_that("find_files", {
   # Literal
   expect_equal(find_files("hw1.qmd", dir), "hw1.qmd", ignore_attr=TRUE)
   # Glob
-  expect_equal(find_files("hw1.*", dir), c("hw1.Rproj", "hw1.qmd"), ignore_attr=TRUE)
+  expect_setequal(find_files("hw1.*", dir), c("hw1.Rproj", "hw1.qmd"))
   # Regex
-  expect_equal(find_files("hw1\\.(qmd|Rproj)", dir, regex = TRUE, recurse = FALSE),
-               c("hw1.Rproj", "hw1.qmd"), ignore_attr=TRUE)
+  expect_setequal(find_files("hw1\\.(qmd|Rproj)", dir, regex = TRUE, recurse = FALSE),
+                  c("hw1.Rproj", "hw1.qmd"))
   # Missing file
   expect_true(length(find_files("hw1.Rnw", dir)) ==  0)
 
   # Multiple literal files
-  expect_equal(
+  expect_setequal(
     find_files(c("hw1.Rproj", "hw1.qmd"), dir),
-    c("hw1.Rproj", "hw1.qmd"),
-    ignore_attr=TRUE
+    c("hw1.Rproj", "hw1.qmd")
   )
 
   # Hidden files
