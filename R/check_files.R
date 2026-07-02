@@ -44,7 +44,7 @@ check_files = function(files, dir, all, recurse, type, regex, invert) {
                         recurse = recurse, type = type,
                         regex = regex, invert = invert)
 
-  if (length(problems != 0)) {
+  if (length(problems) != 0) {
     list_items("Disallowed files found: (please remove the following files)", problems)
     invisible(FALSE)
   } else {
@@ -84,7 +84,7 @@ check_required_files = function(files, dir = here::here()) {
 
   missing =  files[!files %in% f]
 
-  if (length(missing != 0)) {
+  if (length(missing) != 0) {
     list_items("The following required files are missing:", missing)
 
     return(invisible(FALSE))

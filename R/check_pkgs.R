@@ -57,7 +57,7 @@ check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$
 
   problems = used_pkgs[!used_pkgs %in% pkgs]
 
-  if (length(problems != 0)) {
+  if (length(problems) != 0) {
     list_items("Disallowed packages used:", problems)
     invisible(FALSE)
   } else {
@@ -73,7 +73,7 @@ check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.R
 
   problems = used_pkgs[used_pkgs %in% pkgs]
 
-  if (length(problems != 0)) {
+  if (length(problems) != 0) {
     list_items("Disallowed packages used:", problems)
     invisible(FALSE)
   } else {
@@ -88,7 +88,7 @@ check_required_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd
 
   problems = pkgs[!pkgs %in% used_pkgs]
 
-  if (length(problems != 0)) {
+  if (length(problems) != 0) {
     list_items("The following required packages were not used:", problems)
     invisible(FALSE)
   } else {
