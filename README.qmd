@@ -1,17 +1,14 @@
 ---
-output: github_document
+format: gfm
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    fig.path: "man/figures/README-"
+    out.width: "100%"
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # checklist
 
@@ -20,7 +17,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example: 
+The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example:
 
 * does the project compile (knit)
 * does the project only include the files we want
@@ -57,7 +54,7 @@ Lets look at a simple example of the type of assignment a student might turn in.
 dir = system.file("examples/hw1", package="checklist")
 
 # Show the project contents
-fs::dir_tree(dir)
+fs::dir_tree("inst/examples/hw1")
 ```
 
 We can now use `checklist` to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a knitted version of their homework we could use the following check:
@@ -88,9 +85,7 @@ To refine this, we may want to allow `.gitignore` as well as the `.Rproj.user/` 
 
 ```{r}
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"), 
+  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 ```
-
-

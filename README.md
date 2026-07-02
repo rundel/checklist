@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # checklist
 
@@ -53,8 +54,8 @@ can also find the directory using
 dir = system.file("examples/hw1", package="checklist")
 
 # Show the project contents
-fs::dir_tree(dir)
-#> /private/var/folders/v7/wrxd7cdj6l5gzr0191__m9lr0000gr/T/RtmpV6sOzZ/temp_libpath309c549e67a/checklist/examples/hw1
+fs::dir_tree("inst/examples/hw1")
+#> inst/examples/hw1
 #> ├── README.md
 #> ├── fizzbuzz.png
 #> ├── hw1.Rmd
@@ -106,7 +107,7 @@ can even use standard glob wildcards to make our life easier,
 
 ``` r
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"), 
+  c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 #> Disallowed files found: (please remove the following files)
