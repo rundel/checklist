@@ -26,3 +26,16 @@ check_qmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 - ...:
 
   Additional arguments to pass to `quarto_render()`
+
+## Value
+
+`NULL` invisibly, called for the side effect of rendering the document.
+An error is signaled if rendering fails.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+check_qmd_renders("hw1.qmd")
+} # }
+```

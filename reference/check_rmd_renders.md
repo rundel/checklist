@@ -26,3 +26,16 @@ check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 - ...:
 
   Additional arguments to pass to `render()`
+
+## Value
+
+The path of the rendered output file, as returned by
+[`rmarkdown::render()`](https://pkgs.rstudio.com/rmarkdown/reference/render.html).
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+check_rmd_renders("hw1.Rmd")
+} # }
+```

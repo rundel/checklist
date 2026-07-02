@@ -47,3 +47,21 @@ handle_error(
 
 Invisible result of `expr` if it succeeds, otherwise the error or
 warning object.
+
+## Examples
+
+``` r
+handle_error(
+  1 + 1,
+  on_success = message("success"),
+  on_error = message("error")
+)
+#> success
+
+handle_error(
+  stop("Something went wrong"),
+  on_success = message("success"),
+  on_error = message("error")
+)
+#> error
+```

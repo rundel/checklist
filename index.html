@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>A package for running checks on projects and other assignments • checklist</title>
+<title>Check the Structure of Student Assignment Submissions • checklist</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A package for running checks on projects and other assignments">
-<meta name="description" content="What the package does (one paragraph).">
-<meta property="og:description" content="What the package does (one paragraph).">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Check the Structure of Student Assignment Submissions">
+<meta name="description" content="Tools for instructors to check the structure and reproducibility of student project and assignment submissions. Includes checks for required, allowed, or disallowed files and package dependencies, and that R Markdown and Quarto documents render successfully.">
+<meta property="og:description" content="Tools for instructors to check the structure and reproducibility of student project and assignment submissions. Includes checks for required, allowed, or disallowed files and package dependencies, and that R Markdown and Quarto documents render successfully.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">checklist</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rundel/checklist/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -52,9 +53,9 @@
 
 <p>The goal of this package is to provide a variety of tools for checking RStudio project based assignments. These tools are not specifically about testing for the correctness of an assignment, but rather about testing the process and reproducibility of that assignment. For example:</p>
 <ul>
-<li>does the project compile (knit)</li>
-<li>does the project only include the files want</li>
-<li>does the include Rmd document have the correct structure</li>
+<li>does the project compile (render)</li>
+<li>does the project only include the files we want</li>
+<li>does the included qmd document have the correct structure</li>
 <li>and many more</li>
 </ul>
 <div class="section level2">
@@ -66,7 +67,7 @@ You can install the released version of checklist from [CRAN](https://CRAN.R-pro
 install.packages("checklist")
 ```
 -->
-<p>You can install the the development version of this package from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of this package from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rundel/checklist"</span><span class="op">)</span></span></code></pre></div>
@@ -75,48 +76,99 @@ install.packages("checklist")
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rundel.github.io/checklist">checklist</a></span><span class="op">)</span></span></code></pre></div>
-<p>Lets look at a simple example of the type of assignment a student might turnin, all of the files are available in <code>inst/examples/hw1</code> within this repository, if you have already installed the package then we can also find the directory using <code>system.file("examples/hw1", package="checklist")</code>.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rundel.github.io/checklist/">checklist</a></span><span class="op">)</span></span></code></pre></div>
+<p>Lets look at a simple example of the type of assignment a student might turn in. All of the files are available in <code>inst/examples/hw1</code> within this repository, and if you have already installed the package then we can also find the directory using <code>system.file("examples/hw1", package="checklist")</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples/hw1"</span>, package<span class="op">=</span><span class="st">"checklist"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Show the project contents</span></span>
-<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; /Users/rundel/Library/R/arm64/4.3/library/checklist/examples/hw1</span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="st">"inst/examples/hw1"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; inst/examples/hw1</span></span>
 <span><span class="co">#&gt; ├── README.md</span></span>
 <span><span class="co">#&gt; ├── fizzbuzz.png</span></span>
-<span><span class="co">#&gt; ├── hw1.Rmd</span></span>
-<span><span class="co">#&gt; └── hw1.Rproj</span></span></code></pre></div>
-<p>We can now use <code>checklist</code> to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a knitted version of their homework we could use the following check:</p>
+<span><span class="co">#&gt; ├── hw1.Rproj</span></span>
+<span><span class="co">#&gt; └── hw1.qmd</span></span></code></pre></div>
+<p>We can now use <code>checklist</code> to express simple checks for the files in this directory. For example if we wanted to make sure that the students submit a rendered version of their homework we could use the following check:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_required_files</a></span><span class="op">(</span><span class="st">"hw1.md"</span>, <span class="va">dir</span><span class="op">)</span></span>
 <span><span class="co">#&gt; The following required files are missing:</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; ✖ hw1.md</span></span></code></pre></div>
-<p>Alternatively, we may want to prevent the students from turning in a knitted version (to check the reproducibility of their work) and this can be done explicity with</p>
+<p>Alternatively, we may want to prevent the students from turning in a rendered version (to check the reproducibility of their work) and this can be done explicitly with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_disallowed_files</a></span><span class="op">(</span><span class="st">"hw1.md"</span>, <span class="va">dir</span><span class="op">)</span></span></code></pre></div>
-<p>Alternatively we may instead want to explicity about what files are allowed (ensuring students have not added or renamed anything), then we can</p>
+<p>Alternatively we may instead want to be explicit about what files are allowed (ensuring students have not added or renamed anything), then we can</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.qmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span><span class="op">)</span></span></code></pre></div>
 <p>By default the package ignores hidden files (files whose name starts with a <code>.</code>) but we can also check for these as well using the <code>all = TRUE</code> argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.qmd"</span>, <span class="st">"hw1.Rproj"</span><span class="op">)</span>, <span class="va">dir</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; ✖ .hidden</span></span></code></pre></div>
 <p>To refine this, we may want to allow <code>.gitignore</code> as well as the <code>.Rproj.user/</code> folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/check_files.html">check_allowed_files</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.Rmd"</span>, <span class="st">"hw1.Rproj"</span>, <span class="st">".gitignore"</span>, <span class="st">".Rproj.user/*"</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"README.md"</span>, <span class="st">"fizzbuzz.png"</span>, <span class="st">"hw1.qmd"</span>, <span class="st">"hw1.Rproj"</span>, <span class="st">".gitignore"</span>, <span class="st">".Rproj.user/*"</span><span class="op">)</span>,</span>
 <span>  <span class="va">dir</span>, all <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Disallowed files found: (please remove the following files)</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; ✖ .hidden</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="using-with-github-actions">Using with GitHub Actions<a class="anchor" aria-label="anchor" href="#using-with-github-actions"></a>
+</h2>
+<p>These checks are most useful when they run automatically against student submissions, for example via a GitHub Actions workflow in each student’s repository. <code><a href="reference/quit_on_failure.html">quit_on_failure()</a></code> ensures that a failed check also fails the workflow run. An example workflow for the <code>hw1</code> assignment above ships with the package in <code>templates/check_assignment.yml</code> (locate it with <code>system.file("templates/check_assignment.yml", package = "checklist")</code>) and can be copied into an assignment repository as <code>.github/workflows/check_assignment.yml</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> push</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Check Assignment</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="at">  </span><span class="fu">check-allowed-files</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> rocker/r2u:latest</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v7</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install checklist</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>        installGithub.r rundel/checklist</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> bash</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check Files</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>        checklist::quit_on_failure({</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>        })</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="at">  </span><span class="fu">check-renders</span><span class="kw">:</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> rocker/r2u:latest</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v7</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install quarto and checklist</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>        apt-get update -qq &amp;&amp; apt-get install -y --no-install-recommends wget</span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>        wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.27/quarto-1.8.27-linux-amd64.deb</span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>        apt-get install -y ./quarto-1.8.27-linux-amd64.deb &amp;&amp; rm quarto-*.deb</span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>        installGithub.r rundel/checklist</span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> bash</span></span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check Renders</span></span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>        checklist::check_qmd_renders("hw1.qmd", install_missing = TRUE)</span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span></code></pre></div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+</div>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/rundel/checklist/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/rundel/checklist/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -142,9 +194,8 @@ install.packages("checklist")
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22" class="external-link"><img src="https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22" class="external-link"><img src="https://github.com/rundel/checklist/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
 <li><a href="https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/rundel/checklist/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/rundel/checklist/actions/workflows/pkgdown.yaml/badge.svg" alt="pkgdown"></a></li>
 </ul>
 </div>
 

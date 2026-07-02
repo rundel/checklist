@@ -6,14 +6,17 @@
 
 ## Citation
 
-Rundel C (2026). *checklist: A package for running checks on projects
-and other assignments*. R package version 0.1.1,
-<https://rundel.github.io/checklist>.
+Source:
+[`DESCRIPTION`](https://github.com/rundel/checklist/blob/main/DESCRIPTION)
+
+Rundel C (2026). *checklist: Check the Structure of Student Assignment
+Submissions*. R package version 0.2.0,
+<https://rundel.github.io/checklist/>.
 
     @Manual{,
-      title = {checklist: A package for running checks on projects and other assignments},
+      title = {checklist: Check the Structure of Student Assignment Submissions},
       author = {Colin Rundel},
       year = {2026},
-      note = {R package version 0.1.1},
-      url = {https://rundel.github.io/checklist},
+      note = {R package version 0.2.0},
+      url = {https://rundel.github.io/checklist/},
     }
