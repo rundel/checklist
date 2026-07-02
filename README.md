@@ -114,3 +114,55 @@ check_allowed_files(
 #> ────────────────────────────────────────────────────────────────────────────────
 #> ✖ .hidden
 ```
+
+## Using with GitHub Actions
+
+These checks are most useful when they run automatically against student
+submissions, for example via a GitHub Actions workflow in each student’s
+repository. `quit_on_failure()` ensures that a failed check also fails
+the workflow run. An example workflow for the `hw1` assignment above
+ships with the package in `templates/check_assignment.yml` (locate it
+with
+`system.file("templates/check_assignment.yml", package = "checklist")`)
+and can be copied into an assignment repository as
+`.github/workflows/check_assignment.yml`:
+
+``` yaml
+on: push
+name: Check Assignment
+jobs:
+  check-allowed-files:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/r2u:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+    - name: Install checklist
+      run: |
+        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        installGithub.r rundel/checklist
+      shell: bash
+    - name: Check Files
+      run: |
+        checklist::quit_on_failure({
+          checklist::check_allowed_files(c("hw1.Rmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+        })
+      shell: Rscript {0}
+  check-renders:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/r2u:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+    - name: Install checklist
+      run: |
+        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        installGithub.r rundel/checklist
+      shell: bash
+    - name: Check Renders
+      run: |
+        checklist::check_rmd_renders("hw1.Rmd", install_missing = TRUE)
+      shell: Rscript {0}
+```

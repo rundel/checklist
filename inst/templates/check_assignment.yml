@@ -1,0 +1,37 @@
+on: push
+name: Check Assignment
+jobs:
+  check-allowed-files:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/r2u:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+    - name: Install checklist
+      run: |
+        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        installGithub.r rundel/checklist
+      shell: bash
+    - name: Check Files
+      run: |
+        checklist::quit_on_failure({
+          checklist::check_allowed_files(c("hw1.Rmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+        })
+      shell: Rscript {0}
+  check-renders:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/r2u:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+    - name: Install checklist
+      run: |
+        apt-get update -qq && apt-get install -y --no-install-recommends pandoc
+        installGithub.r rundel/checklist
+      shell: bash
+    - name: Check Renders
+      run: |
+        checklist::check_rmd_renders("hw1.Rmd", install_missing = TRUE)
+      shell: Rscript {0}

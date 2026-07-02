@@ -89,3 +89,11 @@ check_allowed_files(
   dir, all = TRUE
 )
 ```
+
+## Using with GitHub Actions
+
+These checks are most useful when they run automatically against student submissions, for example via a GitHub Actions workflow in each student's repository. `quit_on_failure()` ensures that a failed check also fails the workflow run. An example workflow for the `hw1` assignment above ships with the package in `templates/check_assignment.yml` (locate it with `system.file("templates/check_assignment.yml", package = "checklist")`) and can be copied into an assignment repository as `.github/workflows/check_assignment.yml`:
+
+``` yaml
+{{< include inst/templates/check_assignment.yml >}}
+```
