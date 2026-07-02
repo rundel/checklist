@@ -15,6 +15,16 @@ check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 \item{...}{Additional arguments to pass to \code{render()}}
 }
+\value{
+The path of the rendered output file, as returned by
+\code{\link[rmarkdown:render]{rmarkdown::render()}}.
+}
 \description{
 Check an Rmd file renders using rmarkdown
+}
+\examples{
+\dontrun{
+check_rmd_renders("hw1.Rmd")
+}
+
 }

@@ -15,6 +15,16 @@ check_qmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 \item{...}{Additional arguments to pass to \code{quarto_render()}}
 }
+\value{
+\code{NULL} invisibly, called for the side effect of rendering the
+document. An error is signaled if rendering fails.
+}
 \description{
 Check a qmd file renders using Quarto
+}
+\examples{
+\dontrun{
+check_qmd_renders("hw1.qmd")
+}
+
 }

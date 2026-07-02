@@ -35,3 +35,17 @@ Invisible result of \code{expr} if it succeeds, otherwise the error or warning o
 Evaluates the given expression and then runs the \code{on_success}, \code{on_error}, or \code{on_warning}
 expressions depending on the result of the initial evaluation.
 }
+\examples{
+handle_error(
+  1 + 1,
+  on_success = message("success"),
+  on_error = message("error")
+)
+
+handle_error(
+  stop("Something went wrong"),
+  on_success = message("success"),
+  on_error = message("error")
+)
+
+}

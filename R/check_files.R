@@ -10,6 +10,19 @@
 #' otherwise assume wildcard (glob) patterns
 #' @param invert If `TRUE` return files which do *not* match
 #'
+#' @return `find_files()` returns a character vector of matching file paths.
+#' The `check_*` functions return `TRUE` or `FALSE` invisibly, indicating
+#' whether the check passed.
+#'
+#' @examples
+#' dir = system.file("examples/hw1", package = "checklist")
+#'
+#' find_files("*.Rmd", dir)
+#'
+#' check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+#' check_disallowed_files("hw1.md", dir)
+#' check_required_files("hw1.pdf", dir)
+#'
 #' @name check_files
 NULL
 

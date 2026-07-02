@@ -9,7 +9,14 @@
 #' @param expr Expression returning a logical vector
 #' @param n_br Number of leading and trailing blank lines to print
 #'
-#' @return expr
+#' @return The value of `expr`, invisibly. If any element of the result is
+#' not `TRUE` the R session is terminated with exit status 1.
+#'
+#' @examples
+#' \dontrun{
+#' quit_on_failure(check_required_files("hw1.Rmd"))
+#' }
+#'
 #' @export
 #'
 quit_on_failure = function(expr, n_br = 1) {
@@ -39,6 +46,19 @@ quit_on_failure = function(expr, n_br = 1) {
 #' usually used for cleanup.
 #'
 #' @return Invisible result of `expr` if it succeeds, otherwise the error or warning object.
+#'
+#' @examples
+#' handle_error(
+#'   1 + 1,
+#'   on_success = message("success"),
+#'   on_error = message("error")
+#' )
+#'
+#' handle_error(
+#'   stop("Something went wrong"),
+#'   on_success = message("success"),
+#'   on_error = message("error")
+#' )
 #'
 #' @export
 #'

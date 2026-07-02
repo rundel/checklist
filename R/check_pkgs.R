@@ -8,6 +8,25 @@
 #' @param recurse Should directory be recursively explored (i.e. match files in sub directories)
 #' @param ... Additional arguments passed to [install.packages()].
 #'
+#' @return `installed_pkgs()`, `missing_pkgs()`, and `find_pkgs()` return a
+#' character vector of package names (`find_pkgs()` returns a data frame of
+#' dependency details when `full = TRUE`). `install_missing_pkgs()` is called
+#' for its side effect of installing packages and returns `NULL` invisibly.
+#' The `check_*` functions return `TRUE` or `FALSE` invisibly, indicating
+#' whether the check passed.
+#'
+#' @examples
+#' \dontrun{
+#' dir = system.file("examples/package", package = "checklist")
+#'
+#' find_pkgs(dir)
+#' missing_pkgs(dir)
+#'
+#' check_allowed_pkgs(c("dplyr", "ggplot2"), dir)
+#' check_disallowed_pkgs("nlme", dir)
+#' check_required_pkgs("dplyr", dir)
+#' }
+#'
 #' @name check_pkgs
 NULL
 
@@ -33,7 +52,7 @@ install_missing_pkgs = function(dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rn
   utils::install.packages(pkgs = needed, ...)
 }
 
-#' @describeIn check_pkgs Find all of the packages used within a project using renv.
+#' @describeIn check_pkgs Find all of the packages used within a project using `pak::scan_deps()`.
 #' @export
 find_pkgs = function(dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", full = FALSE, recurse = TRUE) {
   files = fs::dir_ls(path = dir, regexp = regexp, recurse = recurse,  type = "file")

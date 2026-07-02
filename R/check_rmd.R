@@ -5,6 +5,14 @@
 #' @param update_packages Should installed packages be updated before rendering. Default `FALSE`.
 #' @param ... Additional arguments to pass to `render()`
 #'
+#' @return The path of the rendered output file, as returned by
+#' [rmarkdown::render()].
+#'
+#' @examples
+#' \dontrun{
+#' check_rmd_renders("hw1.Rmd")
+#' }
+#'
 #' @export
 check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {
   if (!fs::file_exists(file))
@@ -30,6 +38,14 @@ check_rmd_renders = function(file, install_missing = FALSE, update_packages = FA
 #' @param install_missing Should any missing packages be installed. Default `FALSE`.
 #' @param update_packages Should installed packages be updated before rendering. Default `FALSE`.
 #' @param ... Additional arguments to pass to `quarto_render()`
+#'
+#' @return `NULL` invisibly, called for the side effect of rendering the
+#' document. An error is signaled if rendering fails.
+#'
+#' @examples
+#' \dontrun{
+#' check_qmd_renders("hw1.qmd")
+#' }
 #'
 #' @export
 check_qmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {

@@ -68,6 +68,14 @@ check_required_pkgs(
 
 \item{pkgs}{Character vector of package names}
 }
+\value{
+\code{installed_pkgs()}, \code{missing_pkgs()}, and \code{find_pkgs()} return a
+character vector of package names (\code{find_pkgs()} returns a data frame of
+dependency details when \code{full = TRUE}). \code{install_missing_pkgs()} is called
+for its side effect of installing packages and returns \code{NULL} invisibly.
+The \verb{check_*} functions return \code{TRUE} or \code{FALSE} invisibly, indicating
+whether the check passed.
+}
 \description{
 Check for allowed or disallowed package dependencies within a project or directory using \code{pak::scan_deps()}.
 }
@@ -79,7 +87,7 @@ Check for allowed or disallowed package dependencies within a project or directo
 
 \item \code{install_missing_pkgs()}: Installs missing packages found by \code{missing_pkgs}.
 
-\item \code{find_pkgs()}: Find all of the packages used within a project using renv.
+\item \code{find_pkgs()}: Find all of the packages used within a project using \code{pak::scan_deps()}.
 
 \item \code{check_allowed_pkgs()}: Check that only the allowed packages are used
 
@@ -88,3 +96,16 @@ Check for allowed or disallowed package dependencies within a project or directo
 \item \code{check_required_pkgs()}: Check that the required packages are used
 
 }}
+\examples{
+\dontrun{
+dir = system.file("examples/package", package = "checklist")
+
+find_pkgs(dir)
+missing_pkgs(dir)
+
+check_allowed_pkgs(c("dplyr", "ggplot2"), dir)
+check_disallowed_pkgs("nlme", dir)
+check_required_pkgs("dplyr", dir)
+}
+
+}

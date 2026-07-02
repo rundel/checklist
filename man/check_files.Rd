@@ -48,6 +48,11 @@ otherwise assume wildcard (glob) patterns}
 
 \item{invert}{If \code{TRUE} return files which do \emph{not} match}
 }
+\value{
+\code{find_files()} returns a character vector of matching file paths.
+The \verb{check_*} functions return \code{TRUE} or \code{FALSE} invisibly, indicating
+whether the check passed.
+}
 \description{
 Check for allowed or disallowed files in a project or directory
 }
@@ -63,3 +68,13 @@ within the given directory
 \item \code{check_required_files()}: Check that the required file(s) exist
 
 }}
+\examples{
+dir = system.file("examples/hw1", package = "checklist")
+
+find_files("*.Rmd", dir)
+
+check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.Rmd", "hw1.Rproj"), dir)
+check_disallowed_files("hw1.md", dir)
+check_required_files("hw1.pdf", dir)
+
+}

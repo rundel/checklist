@@ -12,7 +12,8 @@ quit_on_failure(expr, n_br = 1)
 \item{n_br}{Number of leading and trailing blank lines to print}
 }
 \value{
-expr
+The value of \code{expr}, invisibly. If any element of the result is
+not \code{TRUE} the R session is terminated with exit status 1.
 }
 \description{
 Evaluate the given expression and if any of the returned values are \code{FALSE} then
@@ -21,4 +22,10 @@ exit with status 1.
 \details{
 This is needed when using \verb{check_*} functions within a continuous integration pipeline
 to signal that a step failed.
+}
+\examples{
+\dontrun{
+quit_on_failure(check_required_files("hw1.Rmd"))
+}
+
 }
