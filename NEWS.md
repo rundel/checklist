@@ -1,3 +1,13 @@
+# checklist 0.2.0
+
+* Renamed the `glob` argument to `regexp` in `find_pkgs()`, `missing_pkgs()`, `install_missing_pkgs()`, and the `check_*_pkgs()` functions; file selection now uses a regular expression.
+
+* Removed the unused `full` argument from `check_allowed_pkgs()`, `check_disallowed_pkgs()`, and `check_required_pkgs()`.
+
+* Fixed `quit_on_failure()` so that a logical vector of all `TRUE` values no longer exits with an error status.
+
+* Added examples and return value documentation for all exported functions.
+
 # checklist 0.1.1
 
 * Added `handle_error()` to help manage the results of `check_rmd_renders()` and `check_qmd_renders()`.
