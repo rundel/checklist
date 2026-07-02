@@ -6,9 +6,8 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/rundel/checklist/workflows/R-CMD-check/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22R-CMD-check%22)
-[![pkgdown](https://github.com/rundel/checklist/workflows/pkgdown/badge.svg)](https://github.com/rundel/checklist/actions?query=workflow:%22pkgdown%22)
 [![R-CMD-check](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rundel/checklist/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/rundel/checklist/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/rundel/checklist/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 The goal of this package is to provide a variety of tools for checking
