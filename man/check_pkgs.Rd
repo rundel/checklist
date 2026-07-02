@@ -37,7 +37,6 @@ check_allowed_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
-  full = FALSE,
   recurse = TRUE
 )
 
@@ -45,7 +44,6 @@ check_disallowed_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
-  full = FALSE,
   recurse = TRUE
 )
 
@@ -53,7 +51,6 @@ check_required_pkgs(
   pkgs,
   dir = here::here(),
   glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
-  full = FALSE,
   recurse = TRUE
 )
 }

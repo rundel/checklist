@@ -52,7 +52,7 @@ find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|
 
 #' @describeIn check_pkgs Check that only the allowed packages are used
 #' @export
-check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", full = FALSE, recurse = TRUE) {
+check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
   used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
 
   problems = used_pkgs[!used_pkgs %in% pkgs]
@@ -68,7 +68,7 @@ check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$
 
 #' @describeIn check_pkgs Check if any disallowed packages are used
 #' @export
-check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", full = FALSE, recurse = TRUE) {
+check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
   used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
 
   problems = used_pkgs[used_pkgs %in% pkgs]
@@ -83,7 +83,7 @@ check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.R
 
 #' @describeIn check_pkgs Check that the required packages are used
 #' @export
-check_required_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", full = FALSE, recurse = TRUE) {
+check_required_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
   used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
 
   problems = pkgs[!pkgs %in% used_pkgs]
