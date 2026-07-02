@@ -13,12 +13,12 @@
 #' @export
 #'
 quit_on_failure = function(expr, n_br = 1) {
-  cat(rep("\n", n_br))
+  cat(strrep("\n", n_br))
 
   force(expr) # evaluate the expression
 
-  if (any(!isTRUE(expr))) { # Fail for *any* non-TRUE value
-    cat(rep("\n", n_br))
+  if (!isTRUE(all(expr))) { # Fail for *any* non-TRUE value
+    cat(strrep("\n", n_br))
     quit(save = "no", status = 1, runLast = FALSE)
   }
 
