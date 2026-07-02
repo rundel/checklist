@@ -12,12 +12,12 @@ test_that("find_pkgs", {
   )
 
   expect_equal(
-    sort(find_pkgs(pkg_dir, glob = "*.Rmd")),
+    sort(find_pkgs(pkg_dir, regexp = "[.]Rmd$")),
     c("A","B","C","D","F", "rmarkdown")
   )
 
   expect_equal(
-    sort(find_pkgs(pkg_dir, glob = "*.R")),
+    sort(find_pkgs(pkg_dir, regexp = "[.]R$")),
     c("A","B","C","D")
   )
 })
@@ -40,12 +40,12 @@ test_that("find_pkgs recurse = FALSE", {
 
 test_that("find_pkgs with no matching files", {
   expect_equal(
-    find_pkgs(pkg_dir, glob = "*.py"),
+    find_pkgs(pkg_dir, regexp = "[.]py$"),
     character(0)
   )
 
   expect_equal(
-    find_pkgs(pkg_dir, glob = "*.py", full = TRUE),
+    find_pkgs(pkg_dir, regexp = "[.]py$", full = TRUE),
     find_pkgs(pkg_dir, full = TRUE)[0, ]
   )
 })

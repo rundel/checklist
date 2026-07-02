@@ -2,7 +2,8 @@
 #'
 #' @param pkgs Character vector of package names
 #' @param dir Directory to search.
-#' @param glob File types to search for, defaults to `R`, `Rmd`, and `Rnw` files.
+#' @param regexp Regular expression used to select files, defaults to matching
+#' `R`, `Rmd`, `Rnw`, and `qmd` files (and their case variants).
 #' @param full Should the full data frame of dependencies be returned or just a vector of package names.
 #' @param recurse Should directory be recursively explored (i.e. match files in sub directories)
 #' @param ... Additional arguments passed to [install.packages()].
@@ -18,8 +19,8 @@ installed_pkgs = function() {
 
 #' @describeIn check_pkgs Returns a vector of packages found by `find_pkgs` that are not currently installed.
 #' @export
-missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
-  needed = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
+missing_pkgs = function(dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", recurse = TRUE) {
+  needed = find_pkgs(dir = dir, regexp = regexp, full = FALSE, recurse = recurse)
   installed = installed_pkgs()
 
   setdiff(needed, installed)
@@ -27,15 +28,15 @@ missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rn
 
 #' @describeIn check_pkgs Installs missing packages found by `missing_pkgs`.
 #' @export
-install_missing_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE, ...) {
-  needed = missing_pkgs(dir = dir, glob = glob, recurse = recurse)
+install_missing_pkgs = function(dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", recurse = TRUE, ...) {
+  needed = missing_pkgs(dir = dir, regexp = regexp, recurse = recurse)
   utils::install.packages(pkgs = needed, ...)
 }
 
 #' @describeIn check_pkgs Find all of the packages used within a project using renv.
 #' @export
-find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", full = FALSE, recurse = TRUE) {
-  files = fs::dir_ls(path = dir, glob = glob, recurse = recurse,  type = "file")
+find_pkgs = function(dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", full = FALSE, recurse = TRUE) {
+  files = fs::dir_ls(path = dir, regexp = regexp, recurse = recurse,  type = "file")
   dir = fs::path_real(dir)
   files = fs::path_real(files)
 
@@ -52,8 +53,8 @@ find_pkgs = function(dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|
 
 #' @describeIn check_pkgs Check that only the allowed packages are used
 #' @export
-check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
-  used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
+check_allowed_pkgs = function(pkgs, dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", recurse = TRUE) {
+  used_pkgs = find_pkgs(dir = dir, regexp = regexp, full = FALSE, recurse = recurse)
 
   problems = used_pkgs[!used_pkgs %in% pkgs]
 
@@ -68,8 +69,8 @@ check_allowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$
 
 #' @describeIn check_pkgs Check if any disallowed packages are used
 #' @export
-check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
-  used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
+check_disallowed_pkgs = function(pkgs, dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", recurse = TRUE) {
+  used_pkgs = find_pkgs(dir = dir, regexp = regexp, full = FALSE, recurse = recurse)
 
   problems = used_pkgs[used_pkgs %in% pkgs]
 
@@ -83,8 +84,8 @@ check_disallowed_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.R
 
 #' @describeIn check_pkgs Check that the required packages are used
 #' @export
-check_required_pkgs = function(pkgs, dir = here::here(), glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$", recurse = TRUE) {
-  used_pkgs = find_pkgs(dir = dir, glob = glob, full = FALSE, recurse = recurse)
+check_required_pkgs = function(pkgs, dir = here::here(), regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$", recurse = TRUE) {
+  used_pkgs = find_pkgs(dir = dir, regexp = regexp, full = FALSE, recurse = recurse)
 
   problems = pkgs[!pkgs %in% used_pkgs]
 

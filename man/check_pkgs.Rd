@@ -15,20 +15,20 @@ installed_pkgs()
 
 missing_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   recurse = TRUE
 )
 
 install_missing_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   recurse = TRUE,
   ...
 )
 
 find_pkgs(
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   full = FALSE,
   recurse = TRUE
 )
@@ -36,28 +36,29 @@ find_pkgs(
 check_allowed_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   recurse = TRUE
 )
 
 check_disallowed_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   recurse = TRUE
 )
 
 check_required_pkgs(
   pkgs,
   dir = here::here(),
-  glob = "*.R$|*.r$|*.Rmd$|*.rmd$|*.Rnw$|*.rnw|*.Qmd|*.qmd$",
+  regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
   recurse = TRUE
 )
 }
 \arguments{
 \item{dir}{Directory to search.}
 
-\item{glob}{File types to search for, defaults to \code{R}, \code{Rmd}, and \code{Rnw} files.}
+\item{regexp}{Regular expression used to select files, defaults to matching
+\code{R}, \code{Rmd}, \code{Rnw}, and \code{qmd} files (and their case variants).}
 
 \item{recurse}{Should directory be recursively explored (i.e. match files in sub directories)}
 
