@@ -10,8 +10,6 @@
 
 * `find_files()` now treats an empty `files` vector as matching nothing (or everything when `invert = TRUE`), so `check_disallowed_files()` with no patterns passes instead of reporting every file.
 
-* Added examples and return value documentation for all exported functions.
-
 # checklist 0.1.1
 
 * Added `handle_error()` to help manage the results of `check_rmd_renders()` and `check_qmd_renders()`.
@@ -21,5 +19,3 @@
 # checklist 0.1.0
 
 * Initial version of checklist.
-
-* Added a `NEWS.md` file to track changes to the package.
