@@ -3,7 +3,7 @@ pkg_dir = system.file("examples/package", package = "checklist")
 test_that("find_pkgs", {
   expect_equal(
     sort(find_pkgs(system.file("examples/hw1", package = "checklist"))),
-    "rmarkdown"
+    c("cli", "here", "rmarkdown")
   )
 
   expect_equal(

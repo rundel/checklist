@@ -1,12 +1,12 @@
 # check_allowed_files
 
     Code
-      check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"), dir = system.file(
-        "examples/hw1", package = "checklist"))
+      check_allowed_files(c("hw1.qmd", "hw1.Rproj"), dir = system.file("examples/hw1",
+        package = "checklist"))
     Message
       Disallowed files found: (please remove the following files)
       --------------------------------------------------------------------------------
-      x fizzbuzz.png
+      x README.md
 
 ---
 
@@ -16,7 +16,6 @@
       Disallowed files found: (please remove the following files)
       --------------------------------------------------------------------------------
       x README.md
-      x fizzbuzz.png
       x hw1.Rproj
       x hw1.qmd
 

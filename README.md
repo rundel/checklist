@@ -56,7 +56,6 @@ dir = system.file("examples/hw1", package="checklist")
 fs::dir_tree("inst/examples/hw1")
 #> inst/examples/hw1
 #> ├── README.md
-#> ├── fizzbuzz.png
 #> ├── hw1.Rproj
 #> └── hw1.qmd
 ```
@@ -86,7 +85,7 @@ allowed (ensuring students have not added or renamed anything), then we
 can
 
 ``` r
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
 By default the package ignores hidden files (files whose name starts
@@ -94,7 +93,7 @@ with a `.`) but we can also check for these as well using the
 `all = TRUE` argument.
 
 ``` r
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
 #> Disallowed files found: (please remove the following files)
 #> ────────────────────────────────────────────────────────────────────────────────
 #> ✖ .hidden
@@ -106,7 +105,7 @@ can even use standard glob wildcards to make our life easier,
 
 ``` r
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
+  c("README.md", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 #> Disallowed files found: (please remove the following files)
@@ -144,7 +143,7 @@ jobs:
     - name: Check Files
       run: |
         checklist::quit_on_failure({
-          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"))
         })
       shell: Rscript {0}
   check-renders:

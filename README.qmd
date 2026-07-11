@@ -72,20 +72,20 @@ check_disallowed_files("hw1.md", dir)
 Alternatively we may instead want to be explicit about what files are allowed (ensuring students have not added or renamed anything), then we can
 
 ```{r}
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
 By default the package ignores hidden files (files whose name starts with a `.`) but we can also check for these as well using the `all = TRUE` argument.
 
 ```{r}
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
 ```
 
 To refine this, we may want to allow `.gitignore` as well as the `.Rproj.user/` folder. These can be added to the files argument and we can even use standard glob wildcards to make our life easier,
 
 ```{r}
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
+  c("README.md", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 ```

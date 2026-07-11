@@ -30,7 +30,7 @@ test_that("find_files", {
   expect_equal(length(find_files(character(0), dir)), 0)
   expect_setequal(
     find_files(character(0), dir, invert = TRUE),
-    c("README.md", "fizzbuzz.png", "hw1.Rproj", "hw1.qmd")
+    c("README.md", "hw1.Rproj", "hw1.qmd")
   )
 })
 
@@ -38,14 +38,14 @@ test_that("check_allowed_files", {
 
   expect_true(
     check_allowed_files(
-      c("fizzbuzz.png", "hw1.qmd", "hw1.Rproj", "README.md"),
+      c("hw1.qmd", "hw1.Rproj", "README.md"),
       dir = system.file("examples/hw1", package="checklist")
     )
   )
 
   expect_false( quietly(
     check_allowed_files(
-      c("hw1.qmd", "hw1.Rproj", "README.md"),
+      c("hw1.qmd", "hw1.Rproj"),
       dir = system.file("examples/hw1", package="checklist")
     )
   ) )
@@ -53,7 +53,7 @@ test_that("check_allowed_files", {
   # Check output
   expect_snapshot(
     check_allowed_files(
-      c("hw1.qmd", "hw1.Rproj", "README.md"),
+      c("hw1.qmd", "hw1.Rproj"),
       dir = system.file("examples/hw1", package="checklist")
     )
   )
