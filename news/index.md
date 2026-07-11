@@ -2,6 +2,18 @@
 
 ## checklist 0.2.0
 
+- Added
+  [`update_installed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md),
+  which uses
+  [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
+  to update installed packages, including packages installed from
+  GitHub.
+  [`check_rmd_renders()`](https://rundel.github.io/checklist/reference/check_rmd_renders.md)
+  and
+  [`check_qmd_renders()`](https://rundel.github.io/checklist/reference/check_qmd_renders.md)
+  now use it when `update_packages = TRUE`, removing the dependency on
+  the remotes package.
+
 - The example assignments in `inst/examples/` now use Quarto (`qmd`)
   documents instead of R Markdown, and an example GitHub Actions
   workflow is included in `inst/templates/`.

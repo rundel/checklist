@@ -22,6 +22,8 @@ install_missing_pkgs(
   ...
 )
 
+update_installed_pkgs()
+
 find_pkgs(
   dir = here::here(),
   regexp = "[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$",
@@ -85,8 +87,10 @@ check_required_pkgs(
 
 `installed_pkgs()`, `missing_pkgs()`, and `find_pkgs()` return a
 character vector of package names (`find_pkgs()` returns a data frame of
-dependency details when `full = TRUE`). `install_missing_pkgs()` is
-called for its side effect of installing packages and returns `NULL`
+dependency details when `full = TRUE`). `install_missing_pkgs()` and
+`update_installed_pkgs()` are called for their side effect of installing
+or updating packages and return `NULL` or the result of
+[`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
 invisibly. The `check_*` functions return `TRUE` or `FALSE` invisibly,
 indicating whether the check passed.
 
@@ -99,6 +103,14 @@ indicating whether the check passed.
 
 - `install_missing_pkgs()`: Installs missing packages found by
   `missing_pkgs`.
+
+- `update_installed_pkgs()`: Updates installed packages using
+  [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html).
+  Packages installed from a remote such as GitHub are updated from that
+  same source, others are updated from the configured repositories.
+  Packages that are not available from a repository and were not
+  installed from a remote (e.g. packages installed from a local source
+  tarball) are skipped.
 
 - `find_pkgs()`: Find all of the packages used within a project using
   [`pak::scan_deps()`](https://pak.r-lib.org/reference/scan_deps.html).

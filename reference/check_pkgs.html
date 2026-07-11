@@ -54,6 +54,8 @@
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">update_installed_pkgs</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">find_pkgs</span><span class="op">(</span></span>
 <span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  regexp <span class="op">=</span> <span class="st">"[.](R|r|Rmd|rmd|Rnw|rnw|Qmd|qmd)$"</span>,</span>
@@ -116,10 +118,11 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>installed_pkgs()</code>, <code>missing_pkgs()</code>, and <code>find_pkgs()</code> return a
 character vector of package names (<code>find_pkgs()</code> returns a data frame of
-dependency details when <code>full = TRUE</code>). <code>install_missing_pkgs()</code> is called
-for its side effect of installing packages and returns <code>NULL</code> invisibly.
-The <code>check_*</code> functions return <code>TRUE</code> or <code>FALSE</code> invisibly, indicating
-whether the check passed.</p>
+dependency details when <code>full = TRUE</code>). <code>install_missing_pkgs()</code> and
+<code>update_installed_pkgs()</code> are called for their side effect of installing
+or updating packages and return <code>NULL</code> or the result of
+<code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code> invisibly. The <code>check_*</code> functions return <code>TRUE</code> or
+<code>FALSE</code> invisibly, indicating whether the check passed.</p>
     </div>
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
@@ -127,6 +130,11 @@ whether the check passed.</p>
 <ul><li><p><code>installed_pkgs()</code>: Returns a vector of installed packages.</p></li>
 <li><p><code>missing_pkgs()</code>: Returns a vector of packages found by <code>find_pkgs</code> that are not currently installed.</p></li>
 <li><p><code>install_missing_pkgs()</code>: Installs missing packages found by <code>missing_pkgs</code>.</p></li>
+<li><p><code>update_installed_pkgs()</code>: Updates installed packages using <code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code>.
+Packages installed from a remote such as GitHub are updated from that same
+source, others are updated from the configured repositories. Packages that
+are not available from a repository and were not installed from a remote
+(e.g. packages installed from a local source tarball) are skipped.</p></li>
 <li><p><code>find_pkgs()</code>: Find all of the packages used within a project using <code><a href="https://pak.r-lib.org/reference/scan_deps.html" class="external-link">pak::scan_deps()</a></code>.</p></li>
 <li><p><code>check_allowed_pkgs()</code>: Check that only the allowed packages are used</p></li>
 <li><p><code>check_disallowed_pkgs()</code>: Check if any disallowed packages are used</p></li>

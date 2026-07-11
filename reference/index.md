@@ -11,6 +11,7 @@
 - [`installed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
   [`missing_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
   [`install_missing_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
+  [`update_installed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
   [`find_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
   [`check_allowed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)
   [`check_disallowed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md)

@@ -20,8 +20,9 @@ check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 - update_packages:
 
-  Should installed packages be updated before rendering. Default
-  `FALSE`.
+  Should installed packages be updated, using
+  [`update_installed_pkgs()`](https://rundel.github.io/checklist/reference/check_pkgs.md),
+  before rendering. Default `FALSE`.
 
 - ...:
 
