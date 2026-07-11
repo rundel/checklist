@@ -1,14 +1,18 @@
 # checklist
 
-The goal of this package is to provide a variety of tools for checking
-RStudio project based assignments. These tools are not specifically
-about testing for the correctness of an assignment, but rather about
-testing the process and reproducibility of that assignment. For example:
+checklist provides tools for instructors to automatically check the
+structure and reproducibility of student assignment submissions. The
+goal is not to check an assignment for correctness, but rather that the
+submission is complete, well-formed, and reproducible. The package
+includes checks for:
 
-- does the project compile (render)
-- does the project only include the files we want
-- does the included qmd document have the correct structure
-- and many more
+- required, allowed, and disallowed files
+- required, allowed, and disallowed package dependencies
+- successful rendering of R Markdown and Quarto documents
+
+Checks can be run locally or, more usefully, automatically against each
+student submission using GitHub Actions or a similar continuous
+integration service.
 
 ## Installation
 
@@ -28,10 +32,10 @@ devtools::install_github("rundel/checklist")
 library(checklist)
 ```
 
-Lets look at a simple example of the type of assignment a student might
+Let’s look at a simple example of the type of assignment a student might
 turn in. All of the files are available in `inst/examples/hw1` within
-this repository, and if you have already installed the package then we
-can also find the directory using
+this repository. If you have already installed the package then the
+directory can also be found using
 `system.file("examples/hw1", package="checklist")`.
 
 ``` r
@@ -42,13 +46,12 @@ dir = system.file("examples/hw1", package="checklist")
 fs::dir_tree("inst/examples/hw1")
 #> inst/examples/hw1
 #> ├── README.md
-#> ├── fizzbuzz.png
 #> ├── hw1.Rproj
 #> └── hw1.qmd
 ```
 
-We can now use `checklist` to express simple checks for the files in
-this directory. For example if we wanted to make sure that the students
+We can now use checklist to express simple checks for the files in this
+directory. For example, if we wanted to make sure that the students
 submit a rendered version of their homework we could use the following
 check:
 
@@ -69,35 +72,34 @@ can be done explicitly with
 check_disallowed_files("hw1.md", dir)
 ```
 
-Alternatively we may instead want to be explicit about what files are
-allowed (ensuring students have not added or renamed anything), then we
-can
+We may instead want to be explicit about which files are allowed,
+ensuring students have not added or renamed anything:
 
 ``` r
 
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
 By default the package ignores hidden files (files whose name starts
-with a `.`) but we can also check for these as well using the
-`all = TRUE` argument.
+with a `.`). These can be included in the checks using the `all = TRUE`
+argument.
 
 ``` r
 
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir, all = TRUE)
 #> Disallowed files found: (please remove the following files)
 #> ────────────────────────────────────────────────────────────────────────────────
 #> ✖ .hidden
 ```
 
 To refine this, we may want to allow `.gitignore` as well as the
-`.Rproj.user/` folder. These can be added to the files argument and we
-can even use standard glob wildcards to make our life easier,
+`.Rproj.user/` folder. These can be added to the files argument, and
+standard glob wildcards are supported to make our life easier:
 
 ``` r
 
 check_allowed_files(
-  c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
+  c("README.md", "hw1.qmd", "hw1.Rproj", ".gitignore", ".Rproj.user/*"),
   dir, all = TRUE
 )
 #> Disallowed files found: (please remove the following files)
@@ -113,9 +115,9 @@ repository.
 [`quit_on_failure()`](https://rundel.github.io/checklist/reference/quit_on_failure.md)
 ensures that a failed check also fails the workflow run. An example
 workflow for the `hw1` assignment above ships with the package in
-`templates/check_assignment.yml` (locate it with
-`system.file("templates/check_assignment.yml", package = "checklist")`)
-and can be copied into an assignment repository as
+`templates/check_assignment.yml`, which can be located with
+`system.file("templates/check_assignment.yml", package = "checklist")`.
+It can be copied into an assignment repository as
 `.github/workflows/check_assignment.yml`:
 
 ``` yaml
@@ -136,7 +138,7 @@ jobs:
     - name: Check Files
       run: |
         checklist::quit_on_failure({
-          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md", "fizzbuzz.png"))
+          checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"))
         })
       shell: Rscript {0}
   check-renders:

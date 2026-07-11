@@ -24,8 +24,11 @@
   so that a logical vector of all `TRUE` values no longer exits with an
   error status.
 
-- Added examples and return value documentation for all exported
-  functions.
+- [`find_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  now treats an empty `files` vector as matching nothing (or everything
+  when `invert = TRUE`), so
+  [`check_disallowed_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+  with no patterns passes instead of reporting every file.
 
 ## checklist 0.1.1
 
@@ -41,5 +44,3 @@
 ## checklist 0.1.0
 
 - Initial version of checklist.
-
-- Added a `NEWS.md` file to track changes to the package.

@@ -38,7 +38,7 @@
 <li><p>Renamed the <code>glob</code> argument to <code>regexp</code> in <code><a href="../reference/check_pkgs.html">find_pkgs()</a></code>, <code><a href="../reference/check_pkgs.html">missing_pkgs()</a></code>, <code><a href="../reference/check_pkgs.html">install_missing_pkgs()</a></code>, and the <code>check_*_pkgs()</code> functions; file selection now uses a regular expression.</p></li>
 <li><p>Removed the unused <code>full</code> argument from <code><a href="../reference/check_pkgs.html">check_allowed_pkgs()</a></code>, <code><a href="../reference/check_pkgs.html">check_disallowed_pkgs()</a></code>, and <code><a href="../reference/check_pkgs.html">check_required_pkgs()</a></code>.</p></li>
 <li><p>Fixed <code><a href="../reference/quit_on_failure.html">quit_on_failure()</a></code> so that a logical vector of all <code>TRUE</code> values no longer exits with an error status.</p></li>
-<li><p>Added examples and return value documentation for all exported functions.</p></li>
+<li><p><code><a href="../reference/check_files.html">find_files()</a></code> now treats an empty <code>files</code> vector as matching nothing (or everything when <code>invert = TRUE</code>), so <code><a href="../reference/check_files.html">check_disallowed_files()</a></code> with no patterns passes instead of reporting every file.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="checklist-011">checklist 0.1.1<a class="anchor" aria-label="anchor" href="#checklist-011"></a></h2>
@@ -47,8 +47,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="checklist-010">checklist 0.1.0<a class="anchor" aria-label="anchor" href="#checklist-010"></a></h2>
-<ul><li><p>Initial version of checklist.</p></li>
-<li><p>Added a <code>NEWS.md</code> file to track changes to the package.</p></li>
+<ul><li>Initial version of checklist.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
@@ -59,7 +58,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

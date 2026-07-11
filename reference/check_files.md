@@ -33,7 +33,10 @@ check_required_files(files, dir = here::here())
 
 - files:
 
-  Character vector of allowed file names
+  Character vector of file names or patterns to match (wildcards by
+  default, regular expressions when `regex = TRUE`).
+  `check_required_files()` matches file names literally and does not
+  support patterns.
 
 - dir:
 
@@ -54,8 +57,8 @@ check_required_files(files, dir = here::here())
 
 - regex:
 
-  If `TRUE` use `allowed_files` as a regular expression otherwise assume
-  wildcard (glob) patterns
+  If `TRUE` use `files` as regular expressions otherwise assume wildcard
+  (glob) patterns
 
 - invert:
 
@@ -76,7 +79,8 @@ whether the check passed.
 
 - `check_disallowed_files()`: Check if any disallowed file(s) exist
 
-- `check_required_files()`: Check that the required file(s) exist
+- `check_required_files()`: Check that the required file(s) exist, file
+  names are matched literally (patterns are not supported)
 
 ## Examples
 
@@ -86,7 +90,7 @@ dir = system.file("examples/hw1", package = "checklist")
 find_files("*.qmd", dir)
 #> hw1.qmd
 
-check_allowed_files(c("README.md", "fizzbuzz.png", "hw1.qmd", "hw1.Rproj"), dir)
+check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir)
 check_disallowed_files("hw1.md", dir)
 check_required_files("hw1.pdf", dir)
 #> The following required files are missing:
