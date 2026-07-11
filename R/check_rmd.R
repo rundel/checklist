@@ -2,7 +2,8 @@
 #'
 #' @param file Path of an Rmd file
 #' @param install_missing Should any missing packages be installed. Default `FALSE`.
-#' @param update_packages Should installed packages be updated before rendering. Default `FALSE`.
+#' @param update_packages Should installed packages be updated, using
+#' [update_installed_pkgs()], before rendering. Default `FALSE`.
 #' @param ... Additional arguments to pass to `render()`
 #'
 #' @return The path of the rendered output file, as returned by
@@ -25,7 +26,7 @@ check_rmd_renders = function(file, install_missing = FALSE, update_packages = FA
   }
 
   if (update_packages) {
-    remotes::update_packages(upgrade = "always")
+    update_installed_pkgs()
   }
 
   rmarkdown::render(file, output_dir = fs::path_dir(file), quiet = TRUE, ...)
@@ -36,7 +37,8 @@ check_rmd_renders = function(file, install_missing = FALSE, update_packages = FA
 #'
 #' @param file Path of an qmd file
 #' @param install_missing Should any missing packages be installed. Default `FALSE`.
-#' @param update_packages Should installed packages be updated before rendering. Default `FALSE`.
+#' @param update_packages Should installed packages be updated, using
+#' [update_installed_pkgs()], before rendering. Default `FALSE`.
 #' @param ... Additional arguments to pass to `quarto_render()`
 #'
 #' @return `NULL` invisibly, called for the side effect of rendering the
@@ -59,7 +61,7 @@ check_qmd_renders = function(file, install_missing = FALSE, update_packages = FA
   }
 
   if (update_packages) {
-    remotes::update_packages(upgrade = "always")
+    update_installed_pkgs()
   }
 
   quarto::quarto_render(file, ...)

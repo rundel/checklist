@@ -11,7 +11,8 @@ check_qmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 \item{install_missing}{Should any missing packages be installed. Default \code{FALSE}.}
 
-\item{update_packages}{Should installed packages be updated before rendering. Default \code{FALSE}.}
+\item{update_packages}{Should installed packages be updated, using
+\code{\link[=update_installed_pkgs]{update_installed_pkgs()}}, before rendering. Default \code{FALSE}.}
 
 \item{...}{Additional arguments to pass to \code{quarto_render()}}
 }

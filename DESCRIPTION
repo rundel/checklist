@@ -23,7 +23,6 @@ Imports:
     cli,
     pak (>= 0.6.0),
     rmarkdown,
-    remotes,
     quarto
 Suggests:
     testthat (>= 3.0.0),
