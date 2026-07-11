@@ -150,6 +150,43 @@ test_that("check_required_pkgs", {
   )
 })
 
+test_that("update_refs", {
+  pkgs = data.frame(
+    package = c("a", "b", "c", "d", "stats"),
+    remotepkgref = c("github::user/a", NA, NA, NA, NA),
+    remotetype = c("github", "github", "standard", NA, NA),
+    remoteusername = c("user", "user", NA, NA, NA),
+    remoterepo = c("a", "b", NA, NA, NA),
+    priority = c(NA, NA, NA, NA, "base")
+  )
+
+  expect_equal(
+    update_refs(pkgs),
+    c("github::user/a", "user/b", "c", "d")
+  )
+
+  # remote metadata columns are absent when no package in the library has them
+  minimal = data.frame(package = c("a", "b"))
+  expect_equal(update_refs(minimal), c("a", "b"))
+
+  expect_length(update_refs(minimal[0, , drop = FALSE]), 0)
+
+  # plain name refs not available from a repository are skipped,
+  # structured refs are kept regardless
+  pkgs2 = data.frame(
+    package = c("a", "b", "c", "d"),
+    remotepkgref = c("github::user/a", "local:://path/b", NA, NA)
+  )
+  expect_equal(
+    update_refs(pkgs2, available = c("c", "x", "y")),
+    c("github::user/a", "local:://path/b", "c")
+  )
+  expect_equal(
+    update_refs(pkgs2, available = character(0)),
+    c("github::user/a", "local:://path/b")
+  )
+})
+
 test_that("missing_pkgs", {
   expect_equal(sort(missing_pkgs(pkg_dir)), c("A", "B", "C", "D", "F"))
 

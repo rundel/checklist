@@ -5,6 +5,7 @@
 \alias{installed_pkgs}
 \alias{missing_pkgs}
 \alias{install_missing_pkgs}
+\alias{update_installed_pkgs}
 \alias{find_pkgs}
 \alias{check_allowed_pkgs}
 \alias{check_disallowed_pkgs}
@@ -25,6 +26,8 @@ install_missing_pkgs(
   recurse = TRUE,
   ...
 )
+
+update_installed_pkgs()
 
 find_pkgs(
   dir = here::here(),
@@ -71,10 +74,11 @@ check_required_pkgs(
 \value{
 \code{installed_pkgs()}, \code{missing_pkgs()}, and \code{find_pkgs()} return a
 character vector of package names (\code{find_pkgs()} returns a data frame of
-dependency details when \code{full = TRUE}). \code{install_missing_pkgs()} is called
-for its side effect of installing packages and returns \code{NULL} invisibly.
-The \verb{check_*} functions return \code{TRUE} or \code{FALSE} invisibly, indicating
-whether the check passed.
+dependency details when \code{full = TRUE}). \code{install_missing_pkgs()} and
+\code{update_installed_pkgs()} are called for their side effect of installing
+or updating packages and return \code{NULL} or the result of
+\code{\link[pak:pkg_install]{pak::pkg_install()}} invisibly. The \verb{check_*} functions return \code{TRUE} or
+\code{FALSE} invisibly, indicating whether the check passed.
 }
 \description{
 Check for allowed or disallowed package dependencies within a project or directory using \code{pak::scan_deps()}.
@@ -86,6 +90,12 @@ Check for allowed or disallowed package dependencies within a project or directo
 \item \code{missing_pkgs()}: Returns a vector of packages found by \code{find_pkgs} that are not currently installed.
 
 \item \code{install_missing_pkgs()}: Installs missing packages found by \code{missing_pkgs}.
+
+\item \code{update_installed_pkgs()}: Updates installed packages using \code{\link[pak:pkg_install]{pak::pkg_install()}}.
+Packages installed from a remote such as GitHub are updated from that same
+source, others are updated from the configured repositories. Packages that
+are not available from a repository and were not installed from a remote
+(e.g. packages installed from a local source tarball) are skipped.
 
 \item \code{find_pkgs()}: Find all of the packages used within a project using \code{pak::scan_deps()}.
 

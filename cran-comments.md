@@ -15,9 +15,9 @@
   e.g. in a continuous integration pipeline) and it is never called in
   examples, tests, or vignettes.
 
-* `install_missing_pkgs()` installs packages. This is the documented
-  purpose of the function and it is never run in examples, tests, or
-  vignettes.
+* `install_missing_pkgs()` and `update_installed_pkgs()` install or
+  update packages. This is the documented purpose of these functions
+  and they are never run in examples, tests, or vignettes.
 
 * The examples for the `check_*_pkgs()` family are wrapped in \dontrun{}
   because `pak::scan_deps()` runs in a subprocess that requires a writable
