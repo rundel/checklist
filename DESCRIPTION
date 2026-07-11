@@ -1,5 +1,5 @@
 Package: checklist
-Title: Structure and Reproducibility Checks for Student Assignments
+Title: Structure and Reproducibility Checks for Student Assignment Repositories
 Version: 0.2.0
 Authors@R:
     person(given = "Colin",
