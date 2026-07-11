@@ -1,16 +1,19 @@
 Package: checklist
-Title: Check the Structure of Student Assignment Submissions
+Title: Structure and Reproducibility Checks for Student Assignments
 Version: 0.2.0
 Authors@R:
     person(given = "Colin",
            family = "Rundel",
            role = c("aut", "cre"),
            email = "rundel@gmail.com")
-Description: Tools for instructors to check the structure and
-    reproducibility of student project and assignment submissions.
-    Includes checks for required, allowed, or disallowed files and
-    package dependencies, and that 'R Markdown' and 'Quarto'
-    documents render successfully.
+Description: Tools for instructors to automatically check the structure
+    and reproducibility of student assignment submissions. Includes
+    checks that required files are present and disallowed files are
+    absent, that all package dependencies are available, and that
+    'R Markdown' and 'Quarto' documents render successfully. Checks can
+    be run locally or with continuous integration services such as
+    'GitHub Actions' to provide students with immediate feedback on
+    their submissions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
