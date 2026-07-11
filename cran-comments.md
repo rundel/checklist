@@ -18,3 +18,9 @@
 * `install_missing_pkgs()` installs packages. This is the documented
   purpose of the function and it is never run in examples, tests, or
   vignettes.
+
+* The examples for the `check_*_pkgs()` family are wrapped in \dontrun{}
+  because `pak::scan_deps()` runs in a subprocess that requires a writable
+  package cache directory, which cannot be guaranteed in the example
+  checking environment. This functionality is fully exercised by the
+  package tests, which redirect the cache to the session temp directory.
