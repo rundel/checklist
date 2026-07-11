@@ -32,7 +32,10 @@ check_disallowed_files(files, dir = here::here(), regex = FALSE)
 check_required_files(files, dir = here::here())
 }
 \arguments{
-\item{files}{Character vector of allowed file names}
+\item{files}{Character vector of file names or patterns to match
+(wildcards by default, regular expressions when \code{regex = TRUE}).
+\code{check_required_files()} matches file names literally and does not
+support patterns.}
 
 \item{dir}{Directory to check}
 
@@ -43,7 +46,7 @@ the number of levels to recurse}
 
 \item{type}{File type to return, one of "file", "directory", or "any"}
 
-\item{regex}{If \code{TRUE} use \code{allowed_files} as a regular expression
+\item{regex}{If \code{TRUE} use \code{files} as regular expressions
 otherwise assume wildcard (glob) patterns}
 
 \item{invert}{If \code{TRUE} return files which do \emph{not} match}
@@ -65,7 +68,8 @@ within the given directory
 
 \item \code{check_disallowed_files()}: Check if any disallowed file(s) exist
 
-\item \code{check_required_files()}: Check that the required file(s) exist
+\item \code{check_required_files()}: Check that the required file(s) exist, file names
+are matched literally (patterns are not supported)
 
 }}
 \examples{

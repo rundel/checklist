@@ -1,12 +1,15 @@
 #' Check for allowed or disallowed files in a project or directory
 #'
-#' @param files Character vector of allowed file names
+#' @param files Character vector of file names or patterns to match
+#' (wildcards by default, regular expressions when `regex = TRUE`).
+#' `check_required_files()` matches file names literally and does not
+#' support patterns.
 #' @param dir Directory to check
 #' @param all If `TRUE` include hidden files
 #' @param recurse If `TRUE` recurse fully, if a positive number
 #' the number of levels to recurse
 #' @param type File type to return, one of "file", "directory", or "any"
-#' @param regex If `TRUE` use `allowed_files` as a regular expression
+#' @param regex If `TRUE` use `files` as regular expressions
 #' otherwise assume wildcard (glob) patterns
 #' @param invert If `TRUE` return files which do *not* match
 #'
@@ -42,6 +45,11 @@ find_files = function(
 
   f = fs::dir_ls(path = dir, all = all, recurse = recurse, type = type)
   f = abs_to_rel_path(f, dir)
+
+  if (length(files) == 0) {
+    if (invert) return(f)
+    else        return(f[0])
+  }
 
   if (!regex)
     files = utils::glob2rx(files)
@@ -88,7 +96,8 @@ check_disallowed_files = function(files, dir = here::here(), regex = FALSE) {
 }
 
 
-#' @describeIn check_files Check that the required file(s) exist
+#' @describeIn check_files Check that the required file(s) exist, file names
+#' are matched literally (patterns are not supported)
 #' @export
 check_required_files = function(files, dir = here::here()) {
   dir = fs::path_real(dir)

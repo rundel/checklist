@@ -8,6 +8,8 @@
 
 * Fixed `quit_on_failure()` so that a logical vector of all `TRUE` values no longer exits with an error status.
 
+* `find_files()` now treats an empty `files` vector as matching nothing (or everything when `invert = TRUE`), so `check_disallowed_files()` with no patterns passes instead of reporting every file.
+
 * Added examples and return value documentation for all exported functions.
 
 # checklist 0.1.1

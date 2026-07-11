@@ -25,6 +25,13 @@ test_that("find_files", {
   # Invert
   expect_false( "hw1.qmd" %in% find_files("hw1.qmd", dir, invert = TRUE) )
   expect_true( "hw1.Rproj" %in% find_files("hw1.qmd", dir, invert = TRUE) )
+
+  # Empty pattern vector matches nothing (everything when inverted)
+  expect_equal(length(find_files(character(0), dir)), 0)
+  expect_setequal(
+    find_files(character(0), dir, invert = TRUE),
+    c("README.md", "fizzbuzz.png", "hw1.Rproj", "hw1.qmd")
+  )
 })
 
 test_that("check_allowed_files", {
@@ -57,6 +64,15 @@ test_that("check_allowed_files", {
       dir = system.file("examples/hw1", package="checklist")
     )
   )
+})
+
+test_that("check_files with empty file vectors", {
+
+  dir = system.file("examples/hw1", package="checklist")
+
+  expect_true( check_disallowed_files(character(0), dir) )
+  expect_true( check_required_files(character(0), dir) )
+  expect_false( quietly( check_allowed_files(character(0), dir) ) )
 })
 
 test_that("check_disallowed_files", {
