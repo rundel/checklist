@@ -19,7 +19,9 @@ handle_error(
 \arguments{
 \item{expr}{Expression to evaluate}
 
-\item{on_success}{Expression to evaluate if \code{expr} succeeds}
+\item{on_success}{Expression to evaluate if \code{expr} succeeds. Evaluated after
+\code{expr} completes; conditions it signals are not caught by \code{on_error} or
+\code{on_warning}.}
 
 \item{on_error}{Expression to evaluate if \code{expr} generates an error}
 

@@ -4,28 +4,40 @@
 \alias{quit_on_failure}
 \title{Quit on Failure}
 \usage{
-quit_on_failure(expr, n_br = 1)
+quit_on_failure(..., n_br = 1)
 }
 \arguments{
-\item{expr}{Expression returning a logical vector}
+\item{...}{One or more expressions, each returning a logical vector.}
 
-\item{n_br}{Number of leading and trailing blank lines to print}
+\item{n_br}{Number of leading blank lines to print before any check output
+(also printed again before exiting on failure).}
 }
 \value{
-The value of \code{expr}, invisibly. If any element of the result is
+The value of the expression (or a list of values when more than
+one expression is given), invisibly. If any element of any result is
 not \code{TRUE} the R session is terminated with exit status 1.
 }
 \description{
-Evaluate the given expression and if any of the returned values are \code{FALSE} then
-exit with status 1.
+Evaluates the given check expression(s) and if any of the returned values
+are not \code{TRUE} then exit with status 1.
 }
 \details{
 This is needed when using \verb{check_*} functions within a continuous integration pipeline
 to signal that a step failed.
+
+Multiple checks must be passed as separate arguments. Do not combine them
+in a braced block, as \code{{ check_a(); check_b() }} only returns the value of
+the last expression and the results of the other checks would be silently
+ignored.
 }
 \examples{
 \dontrun{
 quit_on_failure(check_required_files("hw1.Rmd"))
+
+quit_on_failure(
+  check_required_files("hw1.Rmd"),
+  check_disallowed_files("hw1.html")
+)
 }
 
 }

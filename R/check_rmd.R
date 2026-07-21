@@ -4,6 +4,9 @@
 #' @param install_missing Should any missing packages be installed. Default `FALSE`.
 #' @param update_packages Should installed packages be updated, using
 #' [update_installed_pkgs()], before rendering. Default `FALSE`.
+#' @param output_dir Directory for the rendered output, passed to
+#' [rmarkdown::render()]. The default (`NULL`) renders next to the input file.
+#' @param quiet Should knitting and pandoc output be suppressed. Default `TRUE`.
 #' @param ... Additional arguments to pass to `render()`
 #'
 #' @return The path of the rendered output file, as returned by
@@ -15,27 +18,28 @@
 #' }
 #'
 #' @export
-check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE, ...) {
+check_rmd_renders = function(file, install_missing = FALSE, update_packages = FALSE,
+                             output_dir = NULL, quiet = TRUE, ...) {
   if (!fs::file_exists(file))
     stop("File: ", file, " could not be found.", call. = FALSE)
 
   file = fs::path_real(file)
 
   if (install_missing) {
-    install_missing_pkgs(dir = fs::path_dir(file), regexp = utils::glob2rx(paste0("*", fs::path_file(file))))
+    install_missing_pkgs(dir = fs::path_dir(file), regexp = file_name_regex(file), recurse = FALSE)
   }
 
   if (update_packages) {
     update_installed_pkgs()
   }
 
-  rmarkdown::render(file, output_dir = fs::path_dir(file), quiet = TRUE, ...)
+  rmarkdown::render(file, output_dir = output_dir, quiet = quiet, ...)
 }
 
 
 #' Check a qmd file renders using Quarto
 #'
-#' @param file Path of an qmd file
+#' @param file Path of a qmd file
 #' @param install_missing Should any missing packages be installed. Default `FALSE`.
 #' @param update_packages Should installed packages be updated, using
 #' [update_installed_pkgs()], before rendering. Default `FALSE`.
@@ -57,7 +61,7 @@ check_qmd_renders = function(file, install_missing = FALSE, update_packages = FA
   file = fs::path_real(file)
 
   if (install_missing) {
-    install_missing_pkgs(dir = fs::path_dir(file), regexp = utils::glob2rx(paste0("*", fs::path_file(file))))
+    install_missing_pkgs(dir = fs::path_dir(file), regexp = file_name_regex(file), recurse = FALSE)
   }
 
   if (update_packages) {

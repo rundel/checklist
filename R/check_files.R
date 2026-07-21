@@ -2,8 +2,11 @@
 #'
 #' @param files Character vector of file names or patterns to match
 #' (wildcards by default, regular expressions when `regex = TRUE`).
-#' `check_required_files()` matches file names literally and does not
-#' support patterns.
+#' Patterns are matched against file paths relative to `dir`, not just
+#' file names, so `"data/*.csv"` matches csv files in the `data`
+#' subdirectory. Note that `*` also matches `/`, so `"*.csv"` matches
+#' csv files at any depth. `check_required_files()` matches file names
+#' literally and does not support patterns.
 #' @param dir Directory to check
 #' @param all If `TRUE` include hidden files
 #' @param recurse If `TRUE` recurse fully, if a positive number
@@ -52,7 +55,7 @@ find_files = function(
   }
 
   if (!regex)
-    files = utils::glob2rx(files)
+    files = glob_to_regex(files)
 
   pat = paste(files, collapse = "|")
   fs::path_filter(f, regexp = pat, invert = invert)
@@ -96,12 +99,12 @@ check_disallowed_files = function(files, dir = here::here(), regex = FALSE) {
 }
 
 
-#' @describeIn check_files Check that the required file(s) exist, file names
+#' @describeIn check_files Check that the required file(s) exist; file names
 #' are matched literally (patterns are not supported)
 #' @export
 check_required_files = function(files, dir = here::here()) {
   dir = fs::path_real(dir)
-  f = fs::dir_ls(path = dir, all = TRUE, recurse = TRUE, type = "any")
+  f = fs::dir_ls(path = dir, all = TRUE, recurse = TRUE, type = "file")
   f = abs_to_rel_path(f, dir)
 
   missing =  files[!files %in% f]

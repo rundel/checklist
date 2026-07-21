@@ -27,6 +27,8 @@ Imports:
 Suggests:
     testthat (>= 3.0.0),
     callr
+SystemRequirements: pandoc, Quarto command line tool
+    (<https://github.com/quarto-dev/quarto-cli>)
 Config/testthat/edition: 3
 URL: https://rundel.github.io/checklist/, https://github.com/rundel/checklist
 BugReports: https://github.com/rundel/checklist/issues

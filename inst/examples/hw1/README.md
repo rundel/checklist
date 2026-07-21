@@ -1,7 +1,7 @@
 Homework 1 - FizzBuzz
 -------------
 
-This directory is a scaffolded example of an assignment repository, it is used to demonstrate and test the checklist package.
+This directory is a scaffolded example of an assignment repository; it is used to demonstrate and test the checklist package.
 
 ## Task 1 - Implementation
 

@@ -6,6 +6,10 @@ list_items = function(text, files, symbol = cli::col_red(cli::symbol$cross), ind
   if (sort)
     files = sort(files)
 
+  # file names are user or student controlled and must not be interpreted
+  # as cli `{}` expressions
+  files = gsub("}", "}}", gsub("{", "{{", files, fixed = TRUE), fixed = TRUE)
+
   theme = list(
     ul = list("list-style-type" = symbol, "padding-left" = indent)
   )

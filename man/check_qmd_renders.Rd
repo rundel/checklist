@@ -7,7 +7,7 @@
 check_qmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 }
 \arguments{
-\item{file}{Path of an qmd file}
+\item{file}{Path of a qmd file}
 
 \item{install_missing}{Should any missing packages be installed. Default \code{FALSE}.}
 

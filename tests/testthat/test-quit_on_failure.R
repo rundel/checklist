@@ -20,6 +20,25 @@ test_that("quit_on_failure passes through TRUE results", {
   )
 })
 
+test_that("quit_on_failure handles multiple check arguments", {
+  skip_if_not_installed("callr")
+
+  expect_equal(
+    callr::r(function(f) f(TRUE, c(TRUE, TRUE)), args = list(f = local_qof())),
+    list(TRUE, c(TRUE, TRUE))
+  )
+
+  expect_error(
+    callr::r(function(f) f(FALSE, TRUE), args = list(f = local_qof())),
+    class = "callr_status_error"
+  )
+
+  expect_error(
+    callr::r(function(f) f(TRUE, FALSE), args = list(f = local_qof())),
+    class = "callr_status_error"
+  )
+})
+
 test_that("quit_on_failure exits with status 1 on any non-TRUE value", {
   skip_if_not_installed("callr")
 

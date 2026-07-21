@@ -1,35 +1,50 @@
 #' Quit on Failure
 #'
-#' Evaluate the given expression and if any of the returned values are `FALSE` then
-#' exit with status 1.
+#' Evaluates the given check expression(s) and if any of the returned values
+#' are not `TRUE` then exit with status 1.
 #'
 #' This is needed when using `check_*` functions within a continuous integration pipeline
 #' to signal that a step failed.
 #'
-#' @param expr Expression returning a logical vector
-#' @param n_br Number of leading and trailing blank lines to print
+#' Multiple checks must be passed as separate arguments. Do not combine them
+#' in a braced block, as `{ check_a(); check_b() }` only returns the value of
+#' the last expression and the results of the other checks would be silently
+#' ignored.
 #'
-#' @return The value of `expr`, invisibly. If any element of the result is
+#' @param ... One or more expressions, each returning a logical vector.
+#' @param n_br Number of leading blank lines to print before any check output
+#' (also printed again before exiting on failure).
+#'
+#' @return The value of the expression (or a list of values when more than
+#' one expression is given), invisibly. If any element of any result is
 #' not `TRUE` the R session is terminated with exit status 1.
 #'
 #' @examples
 #' \dontrun{
 #' quit_on_failure(check_required_files("hw1.Rmd"))
+#'
+#' quit_on_failure(
+#'   check_required_files("hw1.Rmd"),
+#'   check_disallowed_files("hw1.html")
+#' )
 #' }
 #'
 #' @export
 #'
-quit_on_failure = function(expr, n_br = 1) {
+quit_on_failure = function(..., n_br = 1) {
   cat(strrep("\n", n_br))
 
-  force(expr) # evaluate the expression
+  results = list(...)
 
-  if (!isTRUE(all(expr))) { # Fail for *any* non-TRUE value
+  ok = vapply(results, function(res) isTRUE(all(res)), logical(1))
+
+  if (!all(ok)) { # Fail for *any* non-TRUE value
     cat(strrep("\n", n_br))
     quit(save = "no", status = 1, runLast = FALSE)
   }
 
-  invisible(expr)
+  if (length(results) == 1) invisible(results[[1]])
+  else                      invisible(results)
 }
 
 
@@ -39,7 +54,9 @@ quit_on_failure = function(expr, n_br = 1) {
 #' expressions depending on the result of the initial evaluation.
 #'
 #' @param expr Expression to evaluate
-#' @param on_success Expression to evaluate if `expr` succeeds
+#' @param on_success Expression to evaluate if `expr` succeeds. Evaluated after
+#' `expr` completes; conditions it signals are not caught by `on_error` or
+#' `on_warning`.
 #' @param on_error Expression to evaluate if `expr` generates an error
 #' @param on_warning Expression to evaluate if `expr` generates a warning
 #' @param finally Expression to evaluate after `expr` and `on_success` or `on_error` or `on_warning`,
@@ -63,19 +80,23 @@ quit_on_failure = function(expr, n_br = 1) {
 #' @export
 #'
 handle_error = function(expr, on_success = {}, on_error = {}, on_warning = {}, finally = {}) {
-  invisible(
-    tryCatch({
-      res = expr
-      on_success
-      res
-    }, error = function(e) {
-      on_error
-      e
-    }, warning = function(w) {
-      on_warning
-      w
-    }, finally = {
-      finally
-    })
-  )
+  on.exit(finally)
+
+  success = FALSE
+  res = tryCatch({
+    res = expr
+    success = TRUE
+    res
+  }, error = function(e) {
+    on_error
+    e
+  }, warning = function(w) {
+    on_warning
+    w
+  })
+
+  if (success)
+    on_success
+
+  invisible(res)
 }

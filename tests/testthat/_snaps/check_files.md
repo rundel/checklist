@@ -1,3 +1,12 @@
+# find_files with regex metacharacters in names
+
+    Code
+      check_required_files("hw{n}.qmd", dir)
+    Message
+      The following required files are missing:
+      --------------------------------------------------------------------------------
+      x hw{n}.qmd
+
 # check_allowed_files
 
     Code

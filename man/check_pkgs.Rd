@@ -63,7 +63,7 @@ check_required_pkgs(
 \item{regexp}{Regular expression used to select files, defaults to matching
 \code{R}, \code{Rmd}, \code{Rnw}, and \code{qmd} files (and their case variants).}
 
-\item{recurse}{Should directory be recursively explored (i.e. match files in sub directories)}
+\item{recurse}{Should directory be recursively explored (i.e. match files in subdirectories)}
 
 \item{...}{Additional arguments passed to \code{\link[=install.packages]{install.packages()}}.}
 
@@ -95,7 +95,8 @@ Check for allowed or disallowed package dependencies within a project or directo
 Packages installed from a remote such as GitHub are updated from that same
 source, others are updated from the configured repositories. Packages that
 are not available from a repository and were not installed from a remote
-(e.g. packages installed from a local source tarball) are skipped.
+(e.g. packages installed from a local source tarball) are skipped, provided
+the repository index can be retrieved via \code{\link[utils:available.packages]{utils::available.packages()}}.
 
 \item \code{find_pkgs()}: Find all of the packages used within a project using \code{pak::scan_deps()}.
 

@@ -1,5 +1,7 @@
 on: push
 name: Check Assignment
+permissions:
+  contents: read
 jobs:
   check-allowed-files:
     runs-on: ubuntu-latest
@@ -12,11 +14,13 @@ jobs:
       run: |
         installGithub.r rundel/checklist
       shell: bash
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     - name: Check Files
       run: |
-        checklist::quit_on_failure({
+        checklist::quit_on_failure(
           checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"))
-        })
+        )
       shell: Rscript {0}
   check-renders:
     runs-on: ubuntu-latest
@@ -32,6 +36,8 @@ jobs:
         apt-get install -y ./quarto-1.8.27-linux-amd64.deb && rm quarto-*.deb
         installGithub.r rundel/checklist
       shell: bash
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     - name: Check Renders
       run: |
         checklist::check_qmd_renders("hw1.qmd", install_missing = TRUE)

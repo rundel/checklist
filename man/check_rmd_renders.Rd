@@ -4,7 +4,14 @@
 \alias{check_rmd_renders}
 \title{Check an Rmd file renders using rmarkdown}
 \usage{
-check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
+check_rmd_renders(
+  file,
+  install_missing = FALSE,
+  update_packages = FALSE,
+  output_dir = NULL,
+  quiet = TRUE,
+  ...
+)
 }
 \arguments{
 \item{file}{Path of an Rmd file}
@@ -13,6 +20,11 @@ check_rmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 \item{update_packages}{Should installed packages be updated, using
 \code{\link[=update_installed_pkgs]{update_installed_pkgs()}}, before rendering. Default \code{FALSE}.}
+
+\item{output_dir}{Directory for the rendered output, passed to
+\code{\link[rmarkdown:render]{rmarkdown::render()}}. The default (\code{NULL}) renders next to the input file.}
+
+\item{quiet}{Should knitting and pandoc output be suppressed. Default \code{TRUE}.}
 
 \item{...}{Additional arguments to pass to \code{render()}}
 }

@@ -5,7 +5,7 @@
 #' @param regexp Regular expression used to select files, defaults to matching
 #' `R`, `Rmd`, `Rnw`, and `qmd` files (and their case variants).
 #' @param full Should the full data frame of dependencies be returned or just a vector of package names.
-#' @param recurse Should directory be recursively explored (i.e. match files in sub directories)
+#' @param recurse Should directory be recursively explored (i.e. match files in subdirectories)
 #' @param ... Additional arguments passed to [install.packages()].
 #'
 #' @return `installed_pkgs()`, `missing_pkgs()`, and `find_pkgs()` return a
@@ -88,7 +88,8 @@ update_refs = function(pkgs, available = NULL) {
 #' Packages installed from a remote such as GitHub are updated from that same
 #' source, others are updated from the configured repositories. Packages that
 #' are not available from a repository and were not installed from a remote
-#' (e.g. packages installed from a local source tarball) are skipped.
+#' (e.g. packages installed from a local source tarball) are skipped, provided
+#' the repository index can be retrieved via [utils::available.packages()].
 #' @export
 update_installed_pkgs = function() {
   available = tryCatch(

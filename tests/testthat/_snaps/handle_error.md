@@ -1,4 +1,4 @@
-# find_pkgs
+# handle_error
 
     Code
       handle_error(stop("Bad"), on_error = print("error"), on_warning = print(

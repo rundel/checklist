@@ -24,6 +24,22 @@ test_that("check_rmd_renders renders a valid Rmd", {
   expect_equal(fs::path_ext(out), "md")
 })
 
+test_that("check_rmd_renders passes output_dir and quiet through", {
+  skip_if_not(rmarkdown::pandoc_available())
+
+  dir = fs::dir_create(fs::file_temp("rmd"))
+  out_dir = fs::dir_create(fs::file_temp("rmd_out"))
+  on.exit({
+    fs::dir_delete(dir)
+    fs::dir_delete(out_dir)
+  })
+
+  file = local_doc(dir, "test.Rmd", c("title: Test", "output: md_document"))
+
+  check_rmd_renders(file, output_dir = out_dir, quiet = TRUE)
+  expect_true(fs::file_exists(fs::path(out_dir, "test.md")))
+})
+
 test_that("check_rmd_renders errors when rendering fails", {
   skip_if_not(rmarkdown::pandoc_available())
 

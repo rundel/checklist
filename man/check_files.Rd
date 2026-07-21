@@ -34,8 +34,11 @@ check_required_files(files, dir = here::here())
 \arguments{
 \item{files}{Character vector of file names or patterns to match
 (wildcards by default, regular expressions when \code{regex = TRUE}).
-\code{check_required_files()} matches file names literally and does not
-support patterns.}
+Patterns are matched against file paths relative to \code{dir}, not just
+file names, so \code{"data/*.csv"} matches csv files in the \code{data}
+subdirectory. Note that \code{*} also matches \code{/}, so \code{"*.csv"} matches
+csv files at any depth. \code{check_required_files()} matches file names
+literally and does not support patterns.}
 
 \item{dir}{Directory to check}
 
@@ -68,7 +71,7 @@ within the given directory
 
 \item \code{check_disallowed_files()}: Check if any disallowed file(s) exist
 
-\item \code{check_required_files()}: Check that the required file(s) exist, file names
+\item \code{check_required_files()}: Check that the required file(s) exist; file names
 are matched literally (patterns are not supported)
 
 }}
