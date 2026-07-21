@@ -39,7 +39,14 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_rmd_renders</span><span class="op">(</span><span class="va">file</span>, install_missing <span class="op">=</span> <span class="cn">FALSE</span>, update_packages <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_rmd_renders</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  install_missing <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  update_packages <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,6 +64,15 @@
 <dt id="arg-update-packages">update_packages<a class="anchor" aria-label="anchor" href="#arg-update-packages"></a></dt>
 <dd><p>Should installed packages be updated, using
 <code><a href="check_pkgs.html">update_installed_pkgs()</a></code>, before rendering. Default <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-output-dir">output_dir<a class="anchor" aria-label="anchor" href="#arg-output-dir"></a></dt>
+<dd><p>Directory for the rendered output, passed to
+<code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code>. The default (<code>NULL</code>) renders next to the input file.</p></dd>
+
+
+<dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
+<dd><p>Should knitting and pandoc output be suppressed. Default <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

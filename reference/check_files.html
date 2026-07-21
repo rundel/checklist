@@ -70,8 +70,11 @@
 <dl><dt id="arg-files">files<a class="anchor" aria-label="anchor" href="#arg-files"></a></dt>
 <dd><p>Character vector of file names or patterns to match
 (wildcards by default, regular expressions when <code>regex = TRUE</code>).
-<code>check_required_files()</code> matches file names literally and does not
-support patterns.</p></dd>
+Patterns are matched against file paths relative to <code>dir</code>, not just
+file names, so <code>"data/*.csv"</code> matches csv files in the <code>data</code>
+subdirectory. Note that <code>*</code> also matches <code>/</code>, so <code>"*.csv"</code> matches
+csv files at any depth. <code>check_required_files()</code> matches file names
+literally and does not support patterns.</p></dd>
 
 
 <dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
@@ -113,7 +116,7 @@ whether the check passed.</p>
 within the given directory</p></li>
 <li><p><code>check_allowed_files()</code>: Check that only the allowed file(s) exist</p></li>
 <li><p><code>check_disallowed_files()</code>: Check if any disallowed file(s) exist</p></li>
-<li><p><code>check_required_files()</code>: Check that the required file(s) exist, file names
+<li><p><code>check_required_files()</code>: Check that the required file(s) exist; file names
 are matched literally (patterns are not supported)</p></li>
 </ul></div>
 

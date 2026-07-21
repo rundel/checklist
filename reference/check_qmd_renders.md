@@ -12,7 +12,7 @@ check_qmd_renders(file, install_missing = FALSE, update_packages = FALSE, ...)
 
 - file:
 
-  Path of an qmd file
+  Path of a qmd file
 
 - install_missing:
 

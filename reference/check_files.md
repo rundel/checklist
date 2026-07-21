@@ -34,7 +34,10 @@ check_required_files(files, dir = here::here())
 - files:
 
   Character vector of file names or patterns to match (wildcards by
-  default, regular expressions when `regex = TRUE`).
+  default, regular expressions when `regex = TRUE`). Patterns are
+  matched against file paths relative to `dir`, not just file names, so
+  `"data/*.csv"` matches csv files in the `data` subdirectory. Note that
+  `*` also matches `/`, so `"*.csv"` matches csv files at any depth.
   `check_required_files()` matches file names literally and does not
   support patterns.
 
@@ -79,7 +82,7 @@ whether the check passed.
 
 - `check_disallowed_files()`: Check if any disallowed file(s) exist
 
-- `check_required_files()`: Check that the required file(s) exist, file
+- `check_required_files()`: Check that the required file(s) exist; file
   names are matched literally (patterns are not supported)
 
 ## Examples

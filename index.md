@@ -80,9 +80,16 @@ ensuring students have not added or renamed anything:
 check_allowed_files(c("README.md", "hw1.qmd", "hw1.Rproj"), dir)
 ```
 
-By default the package ignores hidden files (files whose name starts
-with a `.`). These can be included in the checks using the `all = TRUE`
-argument.
+By default
+[`find_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+and
+[`check_allowed_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+ignore hidden files (files whose name starts with a `.`); these can be
+included using the `all = TRUE` argument.
+[`check_disallowed_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+and
+[`check_required_files()`](https://rundel.github.io/checklist/reference/check_files.md)
+always consider hidden files.
 
 ``` r
 
@@ -113,8 +120,9 @@ These checks are most useful when they run automatically against student
 submissions, for example via a GitHub Actions workflow in each student’s
 repository.
 [`quit_on_failure()`](https://rundel.github.io/checklist/reference/quit_on_failure.md)
-ensures that a failed check also fails the workflow run. An example
-workflow for the `hw1` assignment above ships with the package in
+ensures that a failed check also fails the workflow run; multiple checks
+can be passed to it as separate arguments. An example workflow for the
+`hw1` assignment above ships with the package in
 `templates/check_assignment.yml`, which can be located with
 `system.file("templates/check_assignment.yml", package = "checklist")`.
 It can be copied into an assignment repository as
@@ -123,6 +131,8 @@ It can be copied into an assignment repository as
 ``` yaml
 on: push
 name: Check Assignment
+permissions:
+  contents: read
 jobs:
   check-allowed-files:
     runs-on: ubuntu-latest
@@ -135,11 +145,13 @@ jobs:
       run: |
         installGithub.r rundel/checklist
       shell: bash
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     - name: Check Files
       run: |
-        checklist::quit_on_failure({
+        checklist::quit_on_failure(
           checklist::check_allowed_files(c("hw1.qmd", "hw1.Rproj", "README.md"))
-        })
+        )
       shell: Rscript {0}
   check-renders:
     runs-on: ubuntu-latest
@@ -155,6 +167,8 @@ jobs:
         apt-get install -y ./quarto-1.8.27-linux-amd64.deb && rm quarto-*.deb
         installGithub.r rundel/checklist
       shell: bash
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     - name: Check Renders
       run: |
         checklist::check_qmd_renders("hw1.qmd", install_missing = TRUE)

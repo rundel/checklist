@@ -28,7 +28,9 @@ handle_error(
 
 - on_success:
 
-  Expression to evaluate if `expr` succeeds
+  Expression to evaluate if `expr` succeeds. Evaluated after `expr`
+  completes; conditions it signals are not caught by `on_error` or
+  `on_warning`.
 
 - on_error:
 

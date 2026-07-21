@@ -66,8 +66,8 @@ check_required_pkgs(
 
 - recurse:
 
-  Should directory be recursively explored (i.e. match files in sub
-  directories)
+  Should directory be recursively explored (i.e. match files in
+  subdirectories)
 
 - ...:
 
@@ -110,7 +110,9 @@ indicating whether the check passed.
   same source, others are updated from the configured repositories.
   Packages that are not available from a repository and were not
   installed from a remote (e.g. packages installed from a local source
-  tarball) are skipped.
+  tarball) are skipped, provided the repository index can be retrieved
+  via
+  [`utils::available.packages()`](https://rdrr.io/r/utils/available.packages.html).
 
 - `find_pkgs()`: Find all of the packages used within a project using
   [`pak::scan_deps()`](https://pak.r-lib.org/reference/scan_deps.html).

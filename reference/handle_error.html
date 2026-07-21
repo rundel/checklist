@@ -64,7 +64,9 @@ expressions depending on the result of the initial evaluation.</p>
 
 
 <dt id="arg-on-success">on_success<a class="anchor" aria-label="anchor" href="#arg-on-success"></a></dt>
-<dd><p>Expression to evaluate if <code>expr</code> succeeds</p></dd>
+<dd><p>Expression to evaluate if <code>expr</code> succeeds. Evaluated after
+<code>expr</code> completes; conditions it signals are not caught by <code>on_error</code> or
+<code>on_warning</code>.</p></dd>
 
 
 <dt id="arg-on-error">on_error<a class="anchor" aria-label="anchor" href="#arg-on-error"></a></dt>

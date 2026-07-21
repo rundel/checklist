@@ -99,7 +99,7 @@
 
 
 <dt id="arg-recurse">recurse<a class="anchor" aria-label="anchor" href="#arg-recurse"></a></dt>
-<dd><p>Should directory be recursively explored (i.e. match files in sub directories)</p></dd>
+<dd><p>Should directory be recursively explored (i.e. match files in subdirectories)</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -134,7 +134,8 @@ or updating packages and return <code>NULL</code> or the result of
 Packages installed from a remote such as GitHub are updated from that same
 source, others are updated from the configured repositories. Packages that
 are not available from a repository and were not installed from a remote
-(e.g. packages installed from a local source tarball) are skipped.</p></li>
+(e.g. packages installed from a local source tarball) are skipped, provided
+the repository index can be retrieved via <code><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">utils::available.packages()</a></code>.</p></li>
 <li><p><code>find_pkgs()</code>: Find all of the packages used within a project using <code><a href="https://pak.r-lib.org/reference/scan_deps.html" class="external-link">pak::scan_deps()</a></code>.</p></li>
 <li><p><code>check_allowed_pkgs()</code>: Check that only the allowed packages are used</p></li>
 <li><p><code>check_disallowed_pkgs()</code>: Check if any disallowed packages are used</p></li>
